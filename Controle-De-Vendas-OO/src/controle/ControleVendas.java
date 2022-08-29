@@ -4,24 +4,12 @@ import modelo.*;
 import javax.swing.DefaultListModel;
 
 public class ControleVendas {
-	private Venda[] v;
-	private Cliente[] c;
-	private Notebook[] n;
-	private Fone[] f;
-	private Console_Video_Game[] g;
-	private Impressora[] imp;
 	private int qtd_vendas;
 	private ControleDados dados; 
 	
 	public ControleVendas(ControleDados d) {
 		dados = d;
-		this.v = d.getVendas();
-		this.qtd_vendas = d.getVendasSize();
-		this.c = d.getClientes();
-		this.n = d.getNotebooks();
-		this.f = d.getFones();
-		this.g = d.getConsoles();
-		this.imp = d.getImps();
+		this.qtd_vendas = d.getVendasSize();		
 	}
 	
 	public DefaultListModel<String> getTodasVendasNomes() {
@@ -29,82 +17,114 @@ public class ControleVendas {
 		qtd_vendas++;
 		String nome_venda;
 		for(int i = 0; i < qtd_vendas; i++) {
-			nome_venda = getClienteVendaNome(i) + " - " + getValorTotal(i) + " - " + this.v[i].getStatus();
+			nome_venda = getClienteVendaNome(i) + " - R$" + getValorTotal(i) + " - " + getStatus(i);
 			nomes_vendas.addElement(nome_venda);
 		}		
 		return nomes_vendas;
 	}
 	
+	public DefaultListModel<String> getVendaCarrinho(int indice_venda_escolhida) {
+		DefaultListModel<String> nomes_carrinho = new DefaultListModel<String>();
+		String[] lista_carrinho = this.dados.getVendaCarrinho(indice_venda_escolhida);
+		for(int i = 0; i < lista_carrinho.length; i++) {
+			if(lista_carrinho[i] != null) {
+				nomes_carrinho.addElement(lista_carrinho[i]);
+			}
+		}		
+		return nomes_carrinho;
+	}
+	
 	public int getVendasSize() {
-		this.qtd_vendas = dados.getVendasSize(); 
-		return this.qtd_vendas;
+		return this.dados.getVendasSize();
 	}
 	
 	public String getClienteVendaNome(int indice) {
-		this.v = dados.getVendas();
-		return this.v[indice].getClienteVenda().getNome();
+		return this.dados.getClienteVendaNome(indice);
 	}
 	
 	public double getValorTotal(int indice) {
-		return this.v[indice].getPagamento().getValorTot();
+		return this.dados.getValorTotal(indice);
 	}
 	
 	public String getStatus(int indice) {
-		return this.v[indice].getStatus();
+		return this.dados.getStatus(indice);
 	}	
 	
-	public Cliente procuraCliente(String nome_digitado) {
-		Cliente cliente_procurado = new Cliente();
-		for(int i = 0; i<c.length; i++) {
-			if(nome_digitado.equals(c[i].getNome())) {
-				cliente_procurado = c[i];
-				return cliente_procurado;
-			}
-		}		
-		return cliente_procurado;
+	public String procuraNomeCliente(String nome_digitado) {
+		return this.dados.procuraNomeCliente(nome_digitado);
 	}
 	
-	public Notebook procuraNotebook(String not_digitado) {
-		Notebook not_procurado = new Notebook();
-		for(int i = 0; i<n.length; i++) {
-			if(not_digitado.equals(n[i].getNome())) {
-				not_procurado = n[i];
-				return not_procurado;
-			}
-		}		
-		return not_procurado;
+	public String procuraEndCliente(String nome_digitado) {
+		return this.dados.procuraEndCliente(nome_digitado);
 	}
 	
-	public Console_Video_Game procuraConsole(String con_digitado) {
-		Console_Video_Game con_procurado = new Console_Video_Game();
-		for(int i = 0; i<g.length; i++) {
-			if(con_digitado.equals(g[i].getNome())) {
-				con_procurado = g[i];
-				return con_procurado;
-			}
-		}		
-		return con_procurado;
+	public String procuraTelCliente(String nome_digitado) {
+		return this.dados.procuraTelCliente(nome_digitado);
 	}
 	
-	public Impressora procuraImpressora(String imp_digitada) {
-		Impressora imp_procurada = new Impressora();
-		for(int i = 0; i<imp.length; i++) {
-			if(imp_digitada.equals(imp[i].getNome())) {
-				imp_procurada = imp[i];
-				return imp_procurada;
-			}
-		}		
-		return imp_procurada;
+	
+	public String procuraNomeNotebook(String not_digitado) {
+		return this.dados.procuraNomeNotebook(not_digitado);
 	}
 	
-	public Fone procuraFone(String fone_digitado) {
-		Fone fone_procurado = new Fone();
-		for(int i = 0; i<f.length; i++) {
-			if(fone_digitado.equals(f[i].getNome())) {
-				fone_procurado = f[i];
-				return fone_procurado;
+	public double procuraPrecoNotebook(String not_digitado) {
+		return this.dados.procuraPrecoNotebook(not_digitado);
+	}
+	
+	public String procuraNomeConsole(String con_digitado) {
+		return this.dados.procuraNomeConsole(con_digitado); 
+	}
+	
+	public double procuraPrecoConsole(String con_digitado) {
+		return this.dados.procuraPrecoConsole(con_digitado); 
+	}
+	
+	public String procuraNomeImpressora(String imp_digitada) {
+		return this.dados.procuraNomeImpressora(imp_digitada);
+	}
+	
+	public double procuraPrecoImpressora(String imp_digitada) {
+		return this.dados.procuraPrecoImpressora(imp_digitada);
+	}
+	
+	public String procuraNomeFone(String fone_digitado) {
+		return this.dados.procuraNomeFone(fone_digitado);
+	}
+	
+	public double procuraPrecoFone(String fone_digitado) {
+		return this.dados.procuraPrecoFone(fone_digitado);
+	}
+	
+	public String[] converteEmArray(DefaultListModel<String> produtos_carrinho) {
+		String[] carrinho_array = new String[10]; 
+		for(int i = 0; i<produtos_carrinho.getSize(); i++) {
+			carrinho_array[i] = produtos_carrinho.elementAt(i); 
+		}
+		return carrinho_array;
+	}
+	
+	public DefaultListModel<String> getParcelasString(int indice_selecionado){
+		DefaultListModel<String> parcelas = new DefaultListModel<String>();
+		String[] lista_parcelas = this.dados.getParcelasString(indice_selecionado);
+		for(int i = 0; i < lista_parcelas.length; i++) {
+			if(lista_parcelas[i] != null) {
+				parcelas.addElement(lista_parcelas[i]);
 			}
 		}		
-		return fone_procurado;
+		return parcelas;
+	}	
+	
+	public String getDataVenda(int indice_venda) {
+		return this.dados.getDataVenda(indice_venda);
 	}
+	
+	public String getDataVencimento(int indice_venda) {
+		return this.dados.getDataVencimento(indice_venda);
+	}
+	
+	public double getValorPend(int indice_venda) {
+		return this.dados.getValorPend(indice_venda);
+	}
+	
+	
 }

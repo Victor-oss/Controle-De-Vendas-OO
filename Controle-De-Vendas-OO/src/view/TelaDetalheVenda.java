@@ -14,25 +14,33 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 import controle.*;
-import modelo.*; //APAGAR DPSSSSSSSSSSS
 
-public class TelaDetalheVenda implements ActionListener, ItemListener{
-	private JList<String> jlst;	
+public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelectionListener{
+	private JList<String> jlst;
+	private JList<String> jlst2;	
 	private JFrame jf;
 	private JPanel jp;
 	private JScrollPane jscp;
-	private int indice;
+	private JScrollPane jscp2;
+	private int indice_parcela;
 	private DefaultListModel<String> nomes_produtos = new DefaultListModel<String>();
+	private DefaultListModel<String> parcelas = new DefaultListModel<String>();
 	private JButton btn_procurarCli;
 	private JButton btn_adicionarProd;
 	private JButton btn_salvar;
 	private JButton btn_cancelar;
+	private JButton btn_pagar_parc;
+	private JButton btn_excluir;
 	private JTextField nome_cliente;
 	private JTextField nome_prod;
 	private JTextField qtd_prod;
@@ -40,32 +48,40 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 	private JTextField dt_vend;
 	private JTextField dt_venc;
 	private JTextField valor_tot;
+	private JTextField valor_pendente;
 	private ControleDados dados;
 	private ControleVendas contVendas;
-	private Cliente cliente_procurado;//APAGAR DPSSSSSSSSSSSSS
-	private Notebook not_procurado;//APAGAR DPSSSSSSSSSSSSS
-	private Fone fone_procurado;//APAGAR DPSSSSSSSSSSSSS
-	private Impressora imp_procurada;//APAGAR DPSSSSSSSSSSSSS
-	private Console_Video_Game console_procurado;//APAGAR DPSSSSSSSSSSSSS
+	
+	private String nome_cliente_proc;
+	private String end_cliente_proc;
+	private String tel_cliente_proc;
+	
+	private String prod_procurado;
 	private JCheckBox checkNot = new JCheckBox("Notebook");
 	private JCheckBox checkImp = new JCheckBox("Impressora");
 	private JCheckBox checkFone = new JCheckBox("Fone");
 	private JCheckBox checkGame = new JCheckBox("Console Video-Game");
 	private int tipo;
+	private int indice_sel;
 	private double valor_venda = 0;
 	
-	public void mostrarTela(ControleDados d, ControleVendas cv){		
+	public void mostrarTela(ControleDados d, ControleVendas cv, int operacao, int indice_sel){		
 		dados = d;
 		contVendas = cv;
-		//contClientes = new ControleClientes(dados);
-		//nomes_produtos = contClientes.getTodosClientesNomes();
+		this.indice_sel = indice_sel;
+		if(indice_sel != -1) {
+			nomes_produtos = contVendas.getVendaCarrinho(indice_sel);		
+			parcelas = contVendas.getParcelasString(indice_sel);
+		}
+		
 		jlst = new JList<String>(nomes_produtos);
 		jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		jlst2 = new JList<String>(parcelas);
+		jlst2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		jlst2.addListSelectionListener(this);
 		//jlst.addListSelectionListener(this);
-		indice = 0; 
+		indice_parcela = 0; 
 		jf = new JFrame("Cadastrar Venda");
-		jf.setSize(410, 730);
-		jf.setLayout(new FlowLayout());
 		jp = new JPanel();
 		JPanel linha_cliente = new JPanel();
 		JPanel linha_tipo = new JPanel();
@@ -75,7 +91,11 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		JPanel linha_dt_vend = new JPanel();
 		JPanel linha_dt_venc = new JPanel();
 		JPanel linha_valor_tot = new JPanel();
-		JPanel botoes_nova = new JPanel();
+		JPanel botoes_operacoes = new JPanel();
+		JPanel linha_tit_prod = new JPanel();
+		JPanel linha_tit_parc = new JPanel();
+		JPanel linha_btn_pagar = new JPanel();
+		JPanel linha_valor_pendente = new JPanel();
 		jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 		linha_cliente.setLayout(new BoxLayout(linha_cliente, BoxLayout.X_AXIS));
 		linha_cliente.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
@@ -85,8 +105,8 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		linha_qtd.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		linha_tipo.setLayout(new BoxLayout(linha_tipo, BoxLayout.X_AXIS));
 		linha_tipo.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-		botoes_nova.setLayout(new BoxLayout(botoes_nova, BoxLayout.X_AXIS));
-		botoes_nova.setLayout(new BoxLayout(botoes_nova, BoxLayout.X_AXIS));
+		botoes_operacoes.setLayout(new BoxLayout(botoes_operacoes, BoxLayout.X_AXIS));
+		botoes_operacoes.setLayout(new BoxLayout(botoes_operacoes, BoxLayout.X_AXIS));
 		linha_n_parc.setLayout(new BoxLayout(linha_n_parc, BoxLayout.X_AXIS));
 		linha_n_parc.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		linha_dt_vend.setLayout(new BoxLayout(linha_dt_vend, BoxLayout.X_AXIS));
@@ -94,9 +114,21 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		linha_dt_venc.setLayout(new BoxLayout(linha_dt_venc, BoxLayout.X_AXIS));
 		linha_dt_venc.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));	
 		linha_valor_tot.setLayout(new BoxLayout(linha_valor_tot, BoxLayout.X_AXIS));
-		linha_valor_tot.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));	
-		jscp = new JScrollPane(jlst);
-		jscp.setPreferredSize(new Dimension(360,300));
+		linha_valor_tot.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		linha_tit_prod.setLayout(new BoxLayout(linha_tit_prod, BoxLayout.X_AXIS));
+		linha_tit_prod.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));	
+		linha_tit_parc.setLayout(new BoxLayout(linha_tit_parc, BoxLayout.X_AXIS));
+		linha_tit_parc.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		linha_btn_pagar.setLayout(new BoxLayout(linha_btn_pagar, BoxLayout.X_AXIS));
+		linha_btn_pagar.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		linha_valor_pendente.setLayout(new BoxLayout(linha_valor_pendente, BoxLayout.X_AXIS));
+		linha_valor_pendente.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		jlst.setPreferredSize(new Dimension(390,200));
+		jscp = new JScrollPane(jlst, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		jscp.setPreferredSize(new Dimension(390,150));
+		jlst2.setPreferredSize(new Dimension(390,200));
+		jscp2 = new JScrollPane(jlst2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		jscp2.setPreferredSize(new Dimension(390,150));
 		JLabel lab_cliente  = new JLabel("Cliente: ");
 		JLabel lab_produto  = new JLabel("Produto: ");
 		JLabel lab_qtd  = new JLabel("Quantidade: ");
@@ -104,6 +136,9 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		JLabel lab_dt_vend  = new JLabel("Data Venda: ");
 		JLabel lab_dt_venc  = new JLabel("Data Vencimento: ");
 		JLabel lab_valor_tot  = new JLabel("Valor Venda: ");
+		JLabel lab_carrinho  = new JLabel("Produtos: ");
+		JLabel lab_parcelas  = new JLabel("Parcelas: ");
+		JLabel lab_valor_pend  = new JLabel("Valor Pendente: ");
 		nome_cliente= new JTextField(15);
 		nome_prod = new JTextField(15);
 		qtd_prod = new JTextField(15);
@@ -111,10 +146,14 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		dt_vend = new JTextField(15);
 		dt_venc = new JTextField(15);
 		valor_tot = new JTextField(15);
+		valor_pendente = new JTextField(15);
+		valor_pendente.setEnabled(false);
 		btn_procurarCli = new JButton("Procurar");
 		btn_adicionarProd = new JButton("Adicionar");
 		btn_salvar = new JButton("Salvar"); 
 		btn_cancelar = new JButton("Cancelar");
+		btn_pagar_parc = new JButton("Pagar");
+		btn_excluir = new JButton("Excluir");
 		checkFone.addItemListener(this);
 		checkNot.addItemListener(this);
 		checkGame.addItemListener(this);
@@ -124,9 +163,10 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		btn_adicionarProd.addActionListener(this);
 		btn_salvar.addActionListener(this);
 		btn_cancelar.addActionListener(this);
+		btn_pagar_parc.addActionListener(this);
+		btn_excluir.addActionListener(this);
 		linha_cliente.add(lab_cliente);
 		linha_cliente.add(nome_cliente);
-		linha_cliente.add(btn_procurarCli);
 		linha_produto.add(lab_produto);
 		linha_produto.add(nome_prod);
 		linha_qtd.add(lab_qtd);
@@ -144,18 +184,44 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		linha_dt_venc.add(dt_venc);
 		linha_valor_tot.add(lab_valor_tot);
 		linha_valor_tot.add(valor_tot);
-		botoes_nova.add(btn_salvar);
-		botoes_nova.add(btn_cancelar);
-		jp.add(linha_cliente);
-		jp.add(linha_tipo);
-		jp.add(linha_produto);
-		jp.add(linha_qtd);		
-		jp.add(jscp);
-		jp.add(linha_n_parc);
+		linha_tit_prod.add(lab_carrinho);
+		linha_tit_parc.add(lab_parcelas);
+		linha_btn_pagar.add(btn_pagar_parc);
+		if(operacao == 1) {
+			jf.setSize(410, 570);
+			jf.setLayout(new FlowLayout());
+			botoes_operacoes.add(btn_salvar);
+			botoes_operacoes.add(btn_cancelar);
+			linha_cliente.add(btn_procurarCli);
+			jp.add(linha_cliente);
+			jp.add(linha_tipo);
+			jp.add(linha_produto);
+			jp.add(linha_qtd);
+			jp.add(jscp);
+			jp.add(linha_n_parc);
+		} else {
+			jf.setSize(410, 700);
+			jf.setLayout(new FlowLayout());
+			linha_valor_pendente.add(lab_valor_pend);
+			linha_valor_pendente.add(valor_pendente);
+			botoes_operacoes.add(btn_excluir);			
+			jp.add(linha_cliente);
+			jp.add(linha_tit_prod);
+			jp.add(jscp);
+			jp.add(linha_tit_parc);
+			jp.add(jscp2);
+			jp.add(linha_btn_pagar);
+			jp.add(linha_valor_pendente);
+			nome_cliente.setText(contVendas.getClienteVendaNome(indice_sel));
+			dt_vend.setText(contVendas.getDataVenda(indice_sel));
+			dt_venc.setText(contVendas.getDataVencimento(indice_sel));
+			valor_tot.setText(String.format("%.2f", contVendas.getValorTotal(indice_sel)));
+			valor_pendente.setText(String.format("%.2f", contVendas.getValorPend(indice_sel)));
+		}
 		jp.add(linha_dt_vend);
 		jp.add(linha_dt_venc);
 		jp.add(linha_valor_tot);
-		jp.add(botoes_nova);
+		jp.add(botoes_operacoes);		
 		jf.add(jp);
 		jf.setVisible(true);
 	}
@@ -184,75 +250,226 @@ public class TelaDetalheVenda implements ActionListener, ItemListener{
 		dt_vend.setEnabled(false);
 		dt_venc.setEnabled(false);
 		valor_tot.setEnabled(false);
-		nomes_produtos.clear();
+		btn_pagar_parc.setEnabled(false);
+		if(indice_sel == -1) {
+			nomes_produtos.clear();
+		}
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Procurar")) {
-			String nome_digitado = nome_cliente.getText();
-			cliente_procurado = contVendas.procuraCliente(nome_digitado);
-			nome_prod.setEnabled(true);
-			qtd_prod.setEnabled(true);
-			checkFone.setEnabled(true);
-			checkNot.setEnabled(true);
-			checkGame.setEnabled(true);
-			checkImp.setEnabled(true);
-			btn_adicionarProd.setEnabled(true);			
+			try {
+				String nome_digitado = nome_cliente.getText();
+				nome_cliente_proc = contVendas.procuraNomeCliente(nome_digitado);
+				end_cliente_proc = contVendas.procuraEndCliente(nome_digitado);
+				tel_cliente_proc = contVendas.procuraTelCliente(nome_digitado);
+				checkFone.setEnabled(true);
+				checkNot.setEnabled(true);
+				checkGame.setEnabled(true);
+				checkImp.setEnabled(true);				
+			} catch(NullPointerException e) {
+				nome_cliente.setText("");
+				mensagemErroCliente();
+			}					
+								
 		} else if (ae.getActionCommand().equals("Adicionar")) {
-			String produto_digitado = nome_prod.getText();
-			int n_produtos = Integer.parseInt(qtd_prod.getText());
-			double valor_unitario = 0; 
-			if(tipo == 1) {
-				not_procurado = contVendas.procuraNotebook(produto_digitado);
-				valor_unitario = not_procurado.getValorVenda(); 
-				valor_venda += valor_unitario*n_produtos;			
-			} else if (tipo == 2) {
-				fone_procurado = contVendas.procuraFone(produto_digitado);
-				valor_unitario = fone_procurado.getValorVenda(); 
-				valor_venda += valor_unitario*n_produtos;	
-			} else if (tipo == 3) {
-				imp_procurada = contVendas.procuraImpressora(produto_digitado);
-				valor_unitario = imp_procurada.getValorVenda();
-				valor_venda += valor_unitario*n_produtos;
-			} else if (tipo == 4) {
-				console_procurado = contVendas.procuraConsole(produto_digitado);
-				valor_unitario = console_procurado.getValorVenda();
-				valor_venda += valor_unitario*n_produtos;
-			}	
-			valor_tot.setText(String.format("%.2f", valor_venda));
-			nomes_produtos.addElement(produto_digitado+" "+"R$"+valor_unitario+" x"+n_produtos);
-			nome_prod.setText("");
-			qtd_prod.setText("");
-			n_parc.setEnabled(true);
-			dt_vend.setEnabled(true);
-			dt_venc.setEnabled(true);			
-			btn_salvar.setEnabled(true);
-		}  else if (ae.getActionCommand().equals("Salvar")) {
+			try {
+				String produto_digitado = nome_prod.getText();
+				int n_produtos = Integer.parseInt(qtd_prod.getText());
+				double valor_unitario = 0; 
+				if(tipo == 1 && !qtd_prod.getText().isEmpty()) {
+					try {
+						prod_procurado = contVendas.procuraNomeNotebook(produto_digitado);
+						valor_unitario = contVendas.procuraPrecoNotebook(produto_digitado); 
+						valor_venda += valor_unitario*n_produtos;
+						adicionarProdutoNaLista(produto_digitado, valor_unitario, n_produtos);
+					} catch(NullPointerException e) {
+						mensagemErroProduto();
+					}															
+				} else if (tipo == 2 && !qtd_prod.getText().isEmpty()) {
+					try {
+						prod_procurado = contVendas.procuraNomeFone(produto_digitado);
+						valor_unitario = contVendas.procuraPrecoFone(produto_digitado); 
+						valor_venda += valor_unitario*n_produtos;
+						adicionarProdutoNaLista(produto_digitado, valor_unitario, n_produtos);
+					} catch(NullPointerException e) {
+						mensagemErroProduto();
+					}		
+				} else if (tipo == 3 && !qtd_prod.getText().isEmpty()) {
+					try {
+						prod_procurado = contVendas.procuraNomeImpressora(produto_digitado);
+						valor_unitario = contVendas.procuraPrecoImpressora(produto_digitado); 
+						valor_venda += valor_unitario*n_produtos;
+						adicionarProdutoNaLista(produto_digitado, valor_unitario, n_produtos);
+					} catch(NullPointerException e) {
+						mensagemErroProduto();
+					}
+				} else if (tipo == 4 && !qtd_prod.getText().isEmpty()) {
+					try {
+						prod_procurado = contVendas.procuraNomeConsole(produto_digitado);
+						valor_unitario = contVendas.procuraPrecoConsole(produto_digitado); 
+						valor_venda += valor_unitario*n_produtos;
+						adicionarProdutoNaLista(produto_digitado, valor_unitario, n_produtos);
+					} catch(NullPointerException e) {
+						mensagemErroProduto();
+					}
+				} else {
+					mensagemErroQtdProdutos();
+				}					
+			} catch(NumberFormatException e) {
+				mensagemErroQtdProdutos();
+			}				
+		} else if (ae.getActionCommand().equals("Salvar")) {
 			String data_venda = dt_vend.getText();
 			String data_venci = dt_venc.getText();
 			String qtd_meses_parcelados = n_parc.getText();
-			dados.adicionarVenda(cliente_procurado, data_venda, data_venci, valor_venda,Integer.valueOf(qtd_meses_parcelados));
+			if(dados.adicionarVenda(nome_cliente_proc, end_cliente_proc, tel_cliente_proc, data_venda, data_venci, valor_venda,
+				qtd_meses_parcelados, contVendas.converteEmArray(nomes_produtos))) {
+				limparTd();
+			} else {
+				mensagemErroDados();
+			}			
+		} else if (ae.getActionCommand().equals("Cancelar")) {
 			limparTd();
+		} else if (ae.getActionCommand().equals("Pagar")) {
+			if(dados.getStatusParcela(indice_sel, indice_parcela).equals("Não paga")) {
+				dados.pagarParcela(indice_sel, indice_parcela);
+				String data_parcela = dados.getParcelaData(indice_sel, indice_parcela);
+				String valor_parcela = String.format("%.2f",  dados.getParcelaValor(indice_sel, indice_parcela));
+				parcelas.set(indice_parcela, valor_parcela + " - "+ data_parcela +" - Paga");				
+			}
+			if(dados.verificaVendaPaga(indice_sel) == true) {
+				dados.pagaVenda(indice_sel);
+			}
+			btn_pagar_parc.setEnabled(false);
+			valor_pendente.setText(String.format("%.2f", contVendas.getValorPend(indice_sel)));
 		} else {
-			limparTd();
+			jlst.removeListSelectionListener(this);
+			jlst2.removeListSelectionListener(this);
+			nomes_produtos.clear();
+			parcelas.clear();
+			nome_cliente.setText("");
+			dt_vend.setText("");
+			dt_venc.setText("");
+			valor_tot.setText("");
+			valor_pendente.setText("");
+			dados.excluirVenda(indice_sel);
 		}
 	}
 	
+	public void adicionarProdutoNaLista(String produto_digitado, double valor_unitario, int n_produtos) {
+		valor_tot.setText(String.format("%.2f", valor_venda));
+		nomes_produtos.addElement(produto_digitado+" "+"R$"+valor_unitario+" x"+n_produtos);
+		nome_prod.setText("");
+		qtd_prod.setText("");
+		n_parc.setEnabled(true);
+		dt_vend.setEnabled(true);
+		dt_venc.setEnabled(true);			
+		btn_salvar.setEnabled(true);
+	}
+	
 	public void itemStateChanged(ItemEvent evento) {
-	   if(checkNot.isSelected()) {   
-		   tipo = 1;		   
+		nome_prod.setEnabled(true);
+		qtd_prod.setEnabled(true);
+		btn_adicionarProd.setEnabled(true);	
+		if(checkNot.isSelected()) {   
+		   tipo = 1;	
+		   checkNot.setEnabled(false);
+		   if(!checkFone.isEnabled()) {
+			   checkFone.setEnabled(true);
+			   checkFone.doClick();
+		   } else if (!checkGame.isEnabled()) {
+			   checkGame.setEnabled(true);
+			   checkGame.doClick();
+		   } else if (!checkImp.isEnabled()) {
+			   checkImp.setEnabled(true);
+			   checkImp.doClick();
+		   } 
 	   }
 	   
 	   if(checkFone.isSelected()) {   
 		   tipo = 2;
+		   checkFone.setEnabled(false);
+		   if(!checkNot.isEnabled()) {
+			   checkNot.setEnabled(true);
+			   checkNot.doClick();
+		   } else if (!checkGame.isEnabled()) {
+			   checkGame.setEnabled(true);
+			   checkGame.doClick();
+		   } else if (!checkImp.isEnabled()) {
+			   checkImp.setEnabled(true);
+			   checkImp.doClick();
+		   }
 	   }
 	   
 	   if(checkImp.isSelected()) {   
 		   tipo = 3;
+		   checkImp.setEnabled(false);
+		   if(!checkNot.isEnabled()) {
+			   checkNot.setEnabled(true);
+			   checkNot.doClick();
+		   } else if (!checkGame.isEnabled()) {
+			   checkGame.setEnabled(true);
+			   checkGame.doClick();
+		   } else if (!checkFone.isEnabled()) {
+			   checkFone.setEnabled(true);
+			   checkFone.doClick();
+		   }
 	   }
 	   
 	   if(checkGame.isSelected()) {   
 		   tipo = 4;
+		   checkGame.setEnabled(false);
+		   if(!checkNot.isEnabled()) {
+			   checkNot.setEnabled(true);
+			   checkNot.doClick();
+		   } else if (!checkImp.isEnabled()) {
+			   checkImp.setEnabled(true);
+			   checkImp.doClick();
+		   } else if (!checkFone.isEnabled()) {
+			   checkFone.setEnabled(true);
+			   checkFone.doClick();
+		   }
 	   }  			  
-	 }
+	}
+	
+	public void valueChanged(ListSelectionEvent le) {
+		indice_parcela = jlst2.getSelectedIndex();
+		btn_pagar_parc.setEnabled(true);		
+	}
+	
+	public void mensagemErroCliente() {
+		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR CLIENTE!\n "
+				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"
+				+ "1. Nome do cliente não foi digitado corretamente, digite o nome completo\n"
+				+ "2. Cliente não existe", null, 
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mensagemErroQtdProdutos() {
+		JOptionPane.showMessageDialog(null,"ERRO AO ADICIONAR PRODUTO!\n "
+				+ "Digite um número inteiro no campo de quantidade", null, 
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mensagemErroProduto() {
+		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR PRODUTO!\n "
+				+ "Pode ter ocorrido um dos três erros a seguir:  \n"
+				+ "1. Nome do produto não foi digitado corretamente, digite o nome completo\n"
+				+ "2. Produto não existe\n"
+				+ "3. Checkbox errado selecionado", null, 
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mensagemErroDados() {
+		JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR VENDA!\n "
+				+ "Pode ter ocorrido um dos cinco erros a seguir:  \n"
+				+ "1. Data não colocada no formato XX/XX/XXXX, onde X corresponde a um dígito numérico\n"
+				+ "2. Data de vencimento é anterior a data de venda\n"
+				+ "3. Data de venda anterior ao dia atual\n"
+				+ "4. Data inexistente"
+				+ "5. Nem todos os campos foram preenchidos", null, 
+				JOptionPane.ERROR_MESSAGE);
+	}
 }
+

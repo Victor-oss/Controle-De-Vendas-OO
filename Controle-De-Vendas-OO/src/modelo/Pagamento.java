@@ -78,6 +78,22 @@ public class Pagamento {
 		this.qtd_meses = qtd_meses;
 	}
 	
+	public String getStatusParcela(int indice_parc) {
+		return this.parcelas[indice_parc].getStatus();
+	}
+	
+	public boolean verificaTdsParcelasPagas() {
+		boolean vendaPaga = true;
+		for(int i = 0; i < this.parcelas.length; i++) {
+			if(parcelas[i] != null) {
+				if(parcelas[i].getStatus().equals("Não Paga")) {
+					vendaPaga = false;
+				}
+			}
+		}
+		return vendaPaga;
+	}
+	
 	public void gerarParcelas() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		double valor_parcela = getValorTot()/getQtdMeses();
@@ -89,10 +105,10 @@ public class Pagamento {
 		}
 	}
 	
-	public void excluirParcela(Parcela parcela) {
-		//TO DO
+	public Parcela[] getParcelas() {
+		return this.parcelas;
 	}
-	
+		
 	public void pagar() {
 		setValorPend(0);	
 		setValorPago(this.valor_total);		

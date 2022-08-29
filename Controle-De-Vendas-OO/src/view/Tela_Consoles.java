@@ -70,8 +70,10 @@ public class Tela_Consoles implements ListSelectionListener, ActionListener {
 		linha_qtd_jogo.setLayout(new BoxLayout(linha_qtd_jogo, BoxLayout.X_AXIS));
 		linha_qtd_jogo.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		
-		jscp = new JScrollPane(jlst);
+		jlst.setPreferredSize(new Dimension(360,400));
+		jscp = new JScrollPane(jlst, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jscp.setPreferredSize(new Dimension(360,300));
+		
 		titulo  = new JLabel("Cadastrar Produto");
 		JLabel nome_lab  = new JLabel("Nome: ");
 		JLabel fab_lab  = new JLabel("Fabricante: ");	
@@ -200,13 +202,15 @@ public class Tela_Consoles implements ListSelectionListener, ActionListener {
 		} else if(ae.getActionCommand().equals("Salvar")) {
 			String nome_novo = nome_prod.getText(); 
 			String fab_novo = fab_prod.getText();
-			double vlvend_novo = Double.parseDouble(vlvend_prod.getText());
-			double vlcust_novo = Double.parseDouble(vlcusto_prod.getText());
-			
-			int qtdcont_novo = Integer.valueOf(qtd_controle.getText());
-			int qtdjogo_novo = Integer.valueOf(qtd_jogo.getText());
-			dados.adicionarConsole(nome_novo, fab_novo, vlvend_novo, vlcust_novo, qtdcont_novo, qtdjogo_novo);
-			nomes_produtos.addElement(nome_novo);
+			String vlvend_novo = vlvend_prod.getText();
+			String vlcust_novo = vlcusto_prod.getText();
+			String qtdcont_novo = qtd_controle.getText();
+			String qtdjogo_novo = qtd_jogo.getText();
+			if(!dados.adicionarConsole(nome_novo, fab_novo, vlvend_novo, vlcust_novo, qtdcont_novo, qtdjogo_novo)) {
+				mensagemErroCadastro();
+			} else {
+				nomes_produtos.addElement(nome_novo);
+			}			
 			nome_prod.setText("");
 			fab_prod.setText("");
 			vlcusto_prod.setText("");
@@ -247,8 +251,12 @@ public class Tela_Consoles implements ListSelectionListener, ActionListener {
 			
 			btn_editar.setEnabled(false);
 			btn_excluir.setEnabled(false);
-			dados.editarConsole(indice, nome_prod.getText(), fab_prod.getText(), Double.parseDouble(vlcusto_prod.getText()), Double.parseDouble(vlvend_prod.getText()), Integer.valueOf(qtd_controle.getText()), Integer.valueOf(qtd_jogo.getText()));
-			nomes_produtos.set(indice, nome_prod.getText()); 
+			if (!dados.editarConsole(indice, nome_prod.getText(), fab_prod.getText(), vlcusto_prod.getText(), vlvend_prod.getText(),
+				qtd_controle.getText(), qtd_jogo.getText())){
+				mensagemErroCadastro(); 
+			} else {
+				nomes_produtos.set(indice, nome_prod.getText());
+			}			 
 			nome_prod.setText("");
 			fab_prod.setText("");
 			vlcusto_prod.setText("");
@@ -287,6 +295,15 @@ public class Tela_Consoles implements ListSelectionListener, ActionListener {
 			qtd_controle.setText("");
 			qtd_jogo.setText("");
 		}
+	}
+	
+	public void mensagemErroCadastro() {
+		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
+				+ "Pode ter ocorrido um dos três erros a seguir:  \n"
+				+ "1. Nem todos os campos foram preenchidos \n"
+				+ "2. Valores de custo e venda não contem apenas números ou ponto\n"
+				+ "3. Número de controles ou de jogos pré-instalados não são inteiros", null, 
+				JOptionPane.ERROR_MESSAGE);
 	}
 }
 

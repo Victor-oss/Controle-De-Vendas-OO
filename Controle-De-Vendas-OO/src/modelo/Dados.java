@@ -254,7 +254,7 @@ public class Dados {
 		this.vendas[this.n_vendas - 1] = nova_venda;
 	}
 	
-	public void excluir(int indice_excluido) {
+	public void excluirVenda(int indice_excluido) {
 		this.n_vendas--;
 		int i = 0; 
 		for(int index = 0; index < this.n_vendas ; index++) {
@@ -265,4 +265,24 @@ public class Dados {
 			i++;
 		}		
 	}
+	
+	public String[] getCarrinho(int indice_selecionado) {
+		return this.vendas[indice_selecionado].getCarrinho();
+	}
+	
+	public String[] getParcelasString(int indice_selecionado) {
+		String[] parcelas_string = new String[20];
+		Pagamento pagamento = vendas[indice_selecionado].getPagamento();
+		Parcela[] parcelas = pagamento.getParcelas();
+		for(int i = 0; i < parcelas.length; i++) {
+			if(parcelas[i] != null) {
+				parcelas_string[i] = String.format("%.2f", parcelas[i].getValor()) + " - " + parcelas[i].getDataPag() + " - " + parcelas[i].getStatus();
+			}
+		}
+		return parcelas_string;
+	}
+	
+	
+	 
+	
 }

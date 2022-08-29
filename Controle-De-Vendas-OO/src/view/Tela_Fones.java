@@ -70,7 +70,8 @@ public class Tela_Fones implements ListSelectionListener, ActionListener {
 		linha_tec_con.setLayout(new BoxLayout(linha_tec_con, BoxLayout.X_AXIS));
 		linha_tec_con.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		
-		jscp = new JScrollPane(jlst);
+		jlst.setPreferredSize(new Dimension(360,400));
+		jscp = new JScrollPane(jlst, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jscp.setPreferredSize(new Dimension(360,300));
 		titulo  = new JLabel("Cadastrar Produto");
 		JLabel nome_lab  = new JLabel("Nome: ");
@@ -201,18 +202,20 @@ public class Tela_Fones implements ListSelectionListener, ActionListener {
 		} else if(ae.getActionCommand().equals("Salvar")) {
 			String nome_novo = nome_prod.getText(); 
 			String fab_novo = fab_prod.getText();
-			double vlvend_novo = Double.parseDouble(vlvend_prod.getText());
-			double vlcust_novo = Double.parseDouble(vlcusto_prod.getText());
+			String vlvend_novo = vlvend_prod.getText();
+			String vlcust_novo = vlcusto_prod.getText();
 			
 			String tpfone_novo = tipo_fone.getText();
 			String teccon_novo = tec_conexao.getText();
-			dados.adicionarFone(nome_novo, fab_novo, vlvend_novo, vlcust_novo, tpfone_novo, teccon_novo);
-			nomes_produtos.addElement(nome_novo);
+			if(!dados.adicionarFone(nome_novo, fab_novo, vlvend_novo, vlcust_novo, tpfone_novo, teccon_novo)) {
+				mensagemErroCadastro();
+			} else {
+				nomes_produtos.addElement(nome_novo);
+			}			
 			nome_prod.setText("");
 			fab_prod.setText("");
 			vlcusto_prod.setText("");
-			vlvend_prod.setText("");
-			
+			vlvend_prod.setText("");			
 			tipo_fone.setText("");
 			tec_conexao.setText("");
 			
@@ -248,8 +251,12 @@ public class Tela_Fones implements ListSelectionListener, ActionListener {
 			
 			btn_editar.setEnabled(false);
 			btn_excluir.setEnabled(false);
-			dados.editarFone(indice, nome_prod.getText(), fab_prod.getText(), Double.parseDouble(vlcusto_prod.getText()), Double.parseDouble(vlvend_prod.getText()), tipo_fone.getText(), tec_conexao.getText());
-			nomes_produtos.set(indice, nome_prod.getText()); 
+			if(!dados.editarFone(indice, nome_prod.getText(), fab_prod.getText(), vlcusto_prod.getText(), vlvend_prod.getText(), 
+					tipo_fone.getText(), tec_conexao.getText())) {
+				mensagemErroCadastro();
+			} else {
+				nomes_produtos.set(indice, nome_prod.getText()); 
+			}			
 			nome_prod.setText("");
 			fab_prod.setText("");
 			vlcusto_prod.setText("");
@@ -288,5 +295,13 @@ public class Tela_Fones implements ListSelectionListener, ActionListener {
 			tipo_fone.setText("");
 			tec_conexao.setText("");
 		}
+	}
+	
+	public void mensagemErroCadastro() {
+		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
+				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"
+				+ "1. Nem todos os campos foram preenchidos \n"
+				+ "2. Valores de custo e venda não contem apenas números ou ponto", null, 
+				JOptionPane.ERROR_MESSAGE);
 	}
 }

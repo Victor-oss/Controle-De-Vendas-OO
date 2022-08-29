@@ -41,6 +41,5 @@ public class Tela_Menu implements ActionListener{
 	
 	public static void main(String [] args) {
 		new Tela_Menu();
-	}
-	
+	}	
 }

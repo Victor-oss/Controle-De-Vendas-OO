@@ -60,8 +60,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		linha_tel.setLayout(new BoxLayout(linha_tel, BoxLayout.X_AXIS));
 		linha_tel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		botoes_nova.setLayout(new BoxLayout(botoes_nova, BoxLayout.X_AXIS));
-		jscp = new JScrollPane(jlst);
-		jscp.setPreferredSize(new Dimension(360,300));
+		jlst.setPreferredSize(new Dimension(360,400));
+		jscp = new JScrollPane(jlst, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		jscp.setPreferredSize(new Dimension(360,300));		
 		nome_lab  = new JLabel("Nome: ");
 		ende_lab  = new JLabel("Endereco: ");
 		tel_lab  = new JLabel("Telefone: ");

@@ -49,8 +49,8 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 		JPanel linha_vlcusto = new JPanel();
 		JPanel linha_vlvenda = new JPanel();
 		
-		JPanel linha_arm = new JPanel();//AQUI
-		JPanel linha_so = new JPanel();//AQUI
+		JPanel linha_arm = new JPanel();
+		JPanel linha_so = new JPanel();
 		
 		jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 		botoes_CRUD.setLayout(new BoxLayout(botoes_CRUD, BoxLayout.X_AXIS));
@@ -70,7 +70,8 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 		linha_so.setLayout(new BoxLayout(linha_so, BoxLayout.X_AXIS));//AQUI
 		linha_so.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));//AQUI
 		
-		jscp = new JScrollPane(jlst);
+		jlst.setPreferredSize(new Dimension(360,400));
+		jscp = new JScrollPane(jlst, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jscp.setPreferredSize(new Dimension(360,300));
 		titulo  = new JLabel("Cadastrar Produto");
 		JLabel nome_lab  = new JLabel("Nome: ");
@@ -200,18 +201,19 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 		} else if(ae.getActionCommand().equals("Salvar")) {
 			String nome_novo = nome_prod.getText(); 
 			String fab_novo = fab_prod.getText();
-			double vlvend_novo = Double.parseDouble(vlvend_prod.getText());
-			double vlcust_novo = Double.parseDouble(vlcusto_prod.getText());
-			
-			int arm_novo = Integer.valueOf(armazenamento.getText());
+			String vlvend_novo = vlvend_prod.getText();
+			String vlcust_novo = vlcusto_prod.getText();
+			String arm_novo = armazenamento.getText();
 			String so_novo = so.getText();
-			dados.adicionarNotebook(nome_novo, fab_novo, vlvend_novo, vlcust_novo, arm_novo, so_novo);
-			nomes_produtos.addElement(nome_novo);
+			if(!dados.adicionarNotebook(nome_novo, fab_novo, vlvend_novo, vlcust_novo, arm_novo, so_novo)) {
+				mensagemErroCadastro();
+			} else {
+				nomes_produtos.addElement(nome_novo);
+			}			
 			nome_prod.setText("");
 			fab_prod.setText("");
 			vlcusto_prod.setText("");
 			vlvend_prod.setText("");
-			
 			armazenamento.setText("");
 			so.setText("");
 			
@@ -247,8 +249,12 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 			
 			btn_editar.setEnabled(false);
 			btn_excluir.setEnabled(false);
-			dados.editarNotebook(indice, nome_prod.getText(), fab_prod.getText(), Double.parseDouble(vlcusto_prod.getText()), Double.parseDouble(vlvend_prod.getText()), Integer.valueOf(armazenamento.getText()), so.getText());
-			nomes_produtos.set(indice, nome_prod.getText()); 
+			if (!dados.editarNotebook(indice, nome_prod.getText(), fab_prod.getText(), vlcusto_prod.getText(), vlvend_prod.getText(),
+					armazenamento.getText(), so.getText())) {
+				mensagemErroCadastro();
+			} else {
+				nomes_produtos.set(indice, nome_prod.getText()); 
+			}			
 			nome_prod.setText("");
 			fab_prod.setText("");
 			vlcusto_prod.setText("");
@@ -287,5 +293,14 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 			armazenamento.setText("");
 			so.setText("");
 		}
+	}
+	
+	public void mensagemErroCadastro() {
+		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
+				+ "Pode ter ocorrido um três dois erros a seguir:  \n"
+				+ "1. Nem todos os campos foram preenchidos \n"
+				+ "2. Valores de custo e venda não contem apenas números ou ponto\n"
+				+ "3. Armazenamento não contem apenas números em GB", null, 
+				JOptionPane.ERROR_MESSAGE);
 	}
 }
