@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -149,11 +150,23 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 		valor_pendente = new JTextField(15);
 		valor_pendente.setEnabled(false);
 		btn_procurarCli = new JButton("Procurar");
+		btn_procurarCli.setBackground(Color.green);
+		btn_procurarCli.setForeground(Color.WHITE);
 		btn_adicionarProd = new JButton("Adicionar");
-		btn_salvar = new JButton("Salvar"); 
+		btn_adicionarProd.setBackground(Color.green);
+		btn_adicionarProd.setForeground(Color.WHITE);
+		btn_salvar = new JButton("Salvar");
+		btn_salvar.setBackground(Color.green);
+		btn_salvar.setForeground(Color.WHITE);
 		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setBackground(Color.green);
+		btn_cancelar.setForeground(Color.WHITE);
 		btn_pagar_parc = new JButton("Pagar");
+		btn_pagar_parc.setBackground(Color.green);
+		btn_pagar_parc.setForeground(Color.WHITE);
 		btn_excluir = new JButton("Excluir");
+		btn_excluir.setBackground(Color.green);
+		btn_excluir.setForeground(Color.WHITE);
 		checkFone.addItemListener(this);
 		checkNot.addItemListener(this);
 		checkGame.addItemListener(this);

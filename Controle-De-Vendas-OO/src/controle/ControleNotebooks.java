@@ -20,27 +20,27 @@ public class ControleNotebooks {
 		return nomes_produtos;
 	}
 	
-	public String getNotebooksNomes(int indice) {//APAGAR
+	public String getNotebooksNomes(int indice) {
 		return this.n[indice].getNome();
 	}
 	
-	public String getNotebooksFabricantes(int indice) {//APAGAR
+	public String getNotebooksFabricantes(int indice) {
 		return this.n[indice].getFabricante();
 	}
 	
-	public String getNotebooksValCust(int indice) {//APAGAR
+	public String getNotebooksValCust(int indice) {
 		return String.valueOf(this.n[indice].getValorCusto());
 	}	
 	
-	public String getNotebooksValVend(int indice) {//APAGAR
+	public String getNotebooksValVend(int indice) {
 		return String.valueOf(this.n[indice].getValorVenda());
 	}
 	
-	public String getNotebooksArm(int indice) {//APAGAR
+	public String getNotebooksArm(int indice) {
 		return String.valueOf(this.n[indice].getArmazenamento());
 	}
 	
-	public String getNotebooksSO(int indice) {//APAGAR
+	public String getNotebooksSO(int indice) {
 		return this.n[indice].getSistemaOp();
 	}
 }

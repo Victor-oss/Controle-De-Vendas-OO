@@ -22,9 +22,12 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 		dados = d;
 		contVendas = new ControleVendas(dados);
 		jlst = new JList<String>(nomes_vendas);
-		if(contVendas.getVendasSize() > 0) {
-			nomes_vendas = contVendas.getTodasVendasNomes();
-		}
+		String nome_venda;
+		for(int i = 0; i < contVendas.getVendasSize(); i++) {
+			nome_venda = contVendas.getClienteVendaNome(i) + " - R$" + String.format("%.2f", contVendas.getValorTotal(i)) + " - " + contVendas.getStatus(i);
+			nomes_vendas.addElement(nome_venda);
+		}		
+		
 		jf = new JFrame("Vendas");
 		btn_nova = new JButton("Nova");
 		btn_refresh = new JButton("Recarregar");
@@ -32,7 +35,11 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 		jlst.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		jlst.setVisibleRowCount(10);
 		btn_nova.setBounds(100, 237, 100, 30);
+		btn_nova.setBackground(Color.green);
+		btn_nova.setForeground(Color.WHITE);
 		btn_refresh.setBounds(200, 237, 100, 30);
+		btn_refresh.setBackground(Color.green);
+		btn_refresh.setForeground(Color.WHITE);
 		jf.setLayout(null);
 		jf.add(jlst);
 		jf.add(btn_nova);

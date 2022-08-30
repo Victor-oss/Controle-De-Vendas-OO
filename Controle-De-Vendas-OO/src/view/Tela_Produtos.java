@@ -3,6 +3,8 @@ package view;
 import javax.swing.JButton;
 
 import javax.swing.JFrame;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controle.*;
@@ -21,10 +23,18 @@ public class Tela_Produtos implements ActionListener{
 		janela.setLayout(null);
 		
 		btn_notebooks.setBounds(100, 30, 200, 30);
+		btn_notebooks.setBackground(Color.green);
+		btn_notebooks.setForeground(Color.WHITE);
 		btn_impressoras.setBounds(100, 80, 200, 30);
+		btn_impressoras.setBackground(Color.green);
+		btn_impressoras.setForeground(Color.WHITE);
 		btn_fones.setBounds(100, 130, 200, 30);
-		btn_consoles.setBounds(100, 180, 200, 30);		
-		btn_notebooks.addActionListener(this);
+		btn_fones.setBackground(Color.green);
+		btn_fones.setForeground(Color.WHITE);
+		btn_consoles.setBounds(100, 180, 200, 30);
+		btn_consoles.setBackground(Color.green);
+		btn_consoles.setForeground(Color.WHITE);
+		btn_notebooks.addActionListener(this);		
 		btn_impressoras.addActionListener(this);		
 		btn_fones.addActionListener(this);
 		btn_consoles.addActionListener(this); 

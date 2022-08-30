@@ -1,25 +1,25 @@
 package controle;
 import modelo.*;
 
+
 import javax.swing.DefaultListModel;
 
 public class ControleVendas {
-	private int qtd_vendas;
-	private ControleDados dados; 
+	private ControleDados dados;
 	
 	public ControleVendas(ControleDados d) {
 		dados = d;
-		this.qtd_vendas = d.getVendasSize();		
 	}
 	
 	public DefaultListModel<String> getTodasVendasNomes() {
 		DefaultListModel<String> nomes_vendas = new DefaultListModel<String>();
-		qtd_vendas++;
+		int qtd_vendas = dados.getVendasSize();
 		String nome_venda;
 		for(int i = 0; i < qtd_vendas; i++) {
 			nome_venda = getClienteVendaNome(i) + " - R$" + getValorTotal(i) + " - " + getStatus(i);
 			nomes_vendas.addElement(nome_venda);
 		}		
+		System.out.println(nomes_vendas);
 		return nomes_vendas;
 	}
 	

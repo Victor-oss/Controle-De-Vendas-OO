@@ -1,4 +1,5 @@
 package view;
+import java.awt.Color;
 import java.awt.event.*;
 import controle.*;
 import javax.swing.*;
@@ -17,8 +18,14 @@ public class Tela_Menu implements ActionListener{
 		janela.setLayout(null);
 		nome_loja.setBounds(100, 0, 200, 30);
 		btn_clientes.setBounds(140, 30, 100, 30);
+		btn_clientes.setBackground(Color.green);
+		btn_clientes.setForeground(Color.WHITE);
 		btn_produtos.setBounds(140, 80, 100, 30);
+		btn_produtos.setBackground(Color.green);
+		btn_produtos.setForeground(Color.WHITE);
 		btn_vendas.setBounds(140, 130, 100, 30);
+		btn_vendas.setForeground(Color.WHITE);
+		btn_vendas.setBackground(Color.green);
 		btn_clientes.addActionListener(this);
 		btn_produtos.addActionListener(this);		
 		btn_vendas.addActionListener(this);

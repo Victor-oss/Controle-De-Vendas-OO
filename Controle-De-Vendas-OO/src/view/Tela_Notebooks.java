@@ -91,10 +91,20 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 		so = new JTextField(5);//AQUI
 		
 		btn_novo = new JButton("Novo");
+		btn_novo.setBackground(Color.green);
+		btn_novo.setForeground(Color.WHITE);
 		btn_editar = new JButton("Editar");
+		btn_editar.setBackground(Color.green);
+		btn_editar.setForeground(Color.WHITE);
 		btn_excluir = new JButton("Excluir"); 
+		btn_excluir.setBackground(Color.green);
+		btn_excluir.setForeground(Color.WHITE);
 		btn_salvar = new JButton("Salvar");
+		btn_salvar.setBackground(Color.green);
+		btn_salvar.setForeground(Color.WHITE);
 		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setBackground(Color.green);
+		btn_cancelar.setForeground(Color.WHITE);
 		btn_salvar.setEnabled(false);
 		btn_cancelar.setEnabled(false);
 		btn_editar.setEnabled(false);
@@ -156,13 +166,13 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 		if(indice < 0 || indice >= nomes_produtos.getSize()) {
 			indice = 0;
 		}
-		nome_prod.setText(contNot.getNotebooksNomes(indice));//AQUI
-		fab_prod.setText(contNot.getNotebooksFabricantes(indice));//AQUI
-		vlcusto_prod.setText(contNot.getNotebooksValCust(indice));//AQUI
-		vlvend_prod.setText(contNot.getNotebooksValVend(indice));//AQUI
-		armazenamento.setText(contNot.getNotebooksArm(indice));//AQUI
-		so.setText(contNot.getNotebooksSO(indice));//AQUI
-		titulo.setText("Editar/Deletar Notebook");//AQUI
+		nome_prod.setText(contNot.getNotebooksNomes(indice));
+		fab_prod.setText(contNot.getNotebooksFabricantes(indice));
+		vlcusto_prod.setText(contNot.getNotebooksValCust(indice));
+		vlvend_prod.setText(contNot.getNotebooksValVend(indice));
+		armazenamento.setText(contNot.getNotebooksArm(indice));
+		so.setText(contNot.getNotebooksSO(indice));
+		titulo.setText("Editar/Deletar Notebook");
 		btn_salvar.setEnabled(false);
 		btn_cancelar.setEnabled(false);
 		btn_editar.setEnabled(true);
@@ -297,7 +307,7 @@ public class Tela_Notebooks implements ListSelectionListener, ActionListener {
 	
 	public void mensagemErroCadastro() {
 		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
-				+ "Pode ter ocorrido um três dois erros a seguir:  \n"
+				+ "Pode ter ocorrido um três erros a seguir:  \n"
 				+ "1. Nem todos os campos foram preenchidos \n"
 				+ "2. Valores de custo e venda não contem apenas números ou ponto\n"
 				+ "3. Armazenamento não contem apenas números em GB", null, 

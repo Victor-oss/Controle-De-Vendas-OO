@@ -91,10 +91,20 @@ public class Tela_Fones implements ListSelectionListener, ActionListener {
 		tec_conexao = new JTextField(5);
 		
 		btn_novo = new JButton("Novo");
+		btn_novo.setBackground(Color.green);
+		btn_novo.setForeground(Color.WHITE);
 		btn_editar = new JButton("Editar");
-		btn_excluir = new JButton("Excluir"); 
+		btn_editar.setBackground(Color.green);
+		btn_editar.setForeground(Color.WHITE);
+		btn_excluir = new JButton("Excluir");
+		btn_excluir.setBackground(Color.green);
+		btn_excluir.setForeground(Color.WHITE);
 		btn_salvar = new JButton("Salvar");
+		btn_salvar.setBackground(Color.green);
+		btn_salvar.setForeground(Color.WHITE);
 		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setBackground(Color.green);
+		btn_cancelar.setForeground(Color.WHITE);
 		btn_salvar.setEnabled(false);
 		btn_cancelar.setEnabled(false);
 		btn_editar.setEnabled(false);
@@ -285,7 +295,7 @@ public class Tela_Fones implements ListSelectionListener, ActionListener {
 			btn_salvar.setEnabled(true);
 			btn_cancelar.setEnabled(true);
 			
-			dados.excluirNotebook(indice);
+			dados.excluirFone(indice);
 			nomes_produtos.remove(indice);
 			nome_prod.setText("");
 			fab_prod.setText("");

@@ -249,9 +249,7 @@ public class ControleDados {
 	}
 	
 	//Vendas
-	public Venda[] getVendas() {
-		return d.getVendas();
-	}
+	
 	
 	public int getVendasSize() {
 		return d.getVendasSize();
@@ -326,15 +324,15 @@ public class ControleDados {
 	}	
 	
 	public void pagaVenda(int indice_venda) {
-		this.getVendas()[indice_venda].pagarVenda();
+		this.d.getVendas()[indice_venda].pagarVenda();
 	}
 	
 	public String getDataVenda(int indice_venda) {
-		return this.getVendas()[indice_venda].getPagamento().getDataVend();
+		return this.d.getVendas()[indice_venda].getPagamento().getDataVend();
 	}
 	
 	public String getDataVencimento(int indice_venda) {
-		return this.getVendas()[indice_venda].getPagamento().getDataVenci();
+		return this.d.getVendas()[indice_venda].getPagamento().getDataVenci();
 	}	
 		
 	public String[] getVendaCarrinho(int indice_venda_escolhida) {
@@ -342,27 +340,27 @@ public class ControleDados {
 	}
 			
 	public String getClienteVendaNome(int indice) {
-		return this.getVendas()[indice].getClienteVenda().getNome();
+		return this.d.getVendas()[indice].getClienteVenda().getNome();
 	}
 	
 	public double getValorTotal(int indice) {
-		return this.getVendas()[indice].getPagamento().getValorTot();
+		return this.d.getVendas()[indice].getPagamento().getValorTot();
 	}
 	
 	public double getValorPend(int indice) {
-		return this.getVendas()[indice].getPagamento().getValorPend();
+		return this.d.getVendas()[indice].getPagamento().getValorPend();
 	}
 	
 	public String getStatus(int indice) {
-		return this.getVendas()[indice].getStatus();
+		return this.d.getVendas()[indice].getStatus();
 	}
 	
 	public String getStatusParcela(int indice_venda, int indice_parcela) {
-		return this.getVendas()[indice_venda].getPagamento().getStatusParcela(indice_parcela);
+		return this.d.getVendas()[indice_venda].getPagamento().getStatusParcela(indice_parcela);
 	}
 	
 	public boolean verificaVendaPaga(int indice_venda) {
-		return this.getVendas()[indice_venda].getPagamento().verificaTdsParcelasPagas();
+		return this.d.getVendas()[indice_venda].getPagamento().verificaTdsParcelasPagas();
 	}
 	
 	public String[] getParcelasString(int indice_selecionado) {
@@ -514,7 +512,7 @@ public class ControleDados {
 	}
 	
 	public void pagarParcela(int indice_venda, int indice_parcela) {
-		Venda[] vendas = this.getVendas();
+		Venda[] vendas = this.d.getVendas();
 		Venda vendaSelecionada = vendas[indice_venda];
 		Pagamento pagamento = vendaSelecionada.getPagamento();
 		Parcela[] parcelas = pagamento.getParcelas();
@@ -528,11 +526,11 @@ public class ControleDados {
 	}
 	
 	public double getParcelaValor(int indice_venda, int indice_parcela) {
-		return this.getVendas()[indice_venda].getPagamento().getParcelas()[indice_parcela].getValor();
+		return this.d.getVendas()[indice_venda].getPagamento().getParcelas()[indice_parcela].getValor();
 	}
 	
 	public String getParcelaData(int indice_venda, int indice_parcela) {
-		return this.getVendas()[indice_venda].getPagamento().getParcelas()[indice_parcela].getDataPag();
+		return this.d.getVendas()[indice_venda].getPagamento().getParcelas()[indice_parcela].getDataPag();
 	}
 	
 	public void excluirVenda(int indice_sel) {
