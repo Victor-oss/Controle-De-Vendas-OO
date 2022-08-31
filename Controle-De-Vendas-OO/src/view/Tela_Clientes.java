@@ -13,17 +13,16 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 	private JFrame jf;
 	private JPanel jp;
 	private JScrollPane jscp;
-	private JLabel nome_lab;
-	private JLabel ende_lab;
-	private JLabel tel_lab;
-	private JLabel titulo;
 	private int indice;
 	private DefaultListModel<String> nomes_clientes = new DefaultListModel<String>();
+	private JLabel titulo; 
 	private JButton btn_novo;
 	private JButton btn_editar;
 	private JButton btn_excluir;
 	private JButton btn_salvar;
 	private JButton btn_cancelar;
+	private JButton btn_procurar;
+	private JTextField procura_cliente;
 	private JTextField nome_cliente;
 	private JTextField endereco_cliente;
 	private JTextField telefone_cliente;
@@ -37,10 +36,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		jlst = new JList<String>(nomes_clientes);
 		jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jlst.addListSelectionListener(this);
-		
 		indice = 0; 
 		jf = new JFrame("Clientes");
-		jf.setSize(380, 560);
+		jf.setSize(380, 620);
 		jf.setLayout(new FlowLayout());
 		jp = new JPanel();
 		JPanel botoes_CRUD = new JPanel();
@@ -48,6 +46,7 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		JPanel linha_nome = new JPanel();
 		JPanel linha_ende = new JPanel();
 		JPanel linha_tel = new JPanel();
+		JPanel linha_procurar = new JPanel();
 		JPanel botoes_nova = new JPanel();
 		jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 		botoes_CRUD.setLayout(new BoxLayout(botoes_CRUD, BoxLayout.X_AXIS));
@@ -60,16 +59,21 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		linha_tel.setLayout(new BoxLayout(linha_tel, BoxLayout.X_AXIS));
 		linha_tel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		botoes_nova.setLayout(new BoxLayout(botoes_nova, BoxLayout.X_AXIS));
+		linha_procurar.setLayout(new BoxLayout(linha_procurar, BoxLayout.X_AXIS));
+		linha_procurar.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		jlst.setPreferredSize(new Dimension(360,400));
 		jscp = new JScrollPane(jlst, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jscp.setPreferredSize(new Dimension(360,300));		
-		nome_lab  = new JLabel("Nome: ");
-		ende_lab  = new JLabel("Endereco: ");
-		tel_lab  = new JLabel("Telefone: ");
-		titulo = new JLabel("Cadastrar Cliente");  
+		JLabel nome_lab  = new JLabel("Nome: ");
+		JLabel ende_lab  = new JLabel("Endereco: ");
+		JLabel tel_lab  = new JLabel("Telefone: ");
+		titulo = new JLabel("Cadastrar Cliente");
+		JLabel cliente = new JLabel("Cliente: ");  
 		nome_cliente= new JTextField(15);
 		endereco_cliente = new JTextField(15);
 		telefone_cliente = new JTextField(15);
+		procura_cliente = new JTextField(15);
+		btn_procurar = new JButton("Procurar");
 		btn_novo = new JButton("Novo");
 		btn_novo.setBackground(Color.green);
 		btn_novo.setForeground(Color.WHITE);
@@ -92,12 +96,17 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		nome_cliente.setEnabled(false);
 		endereco_cliente.setEnabled(false);
 		telefone_cliente.setEnabled(false);
+		btn_procurar.addActionListener(this);
 		btn_novo.addActionListener(this);
 		btn_editar.addActionListener(this);
 		btn_excluir.addActionListener(this);
 		btn_salvar.addActionListener(this);
 		btn_cancelar.addActionListener(this); 
+		jp.add(linha_procurar);
 		jp.add(jscp);
+		linha_procurar.add(cliente);
+		linha_procurar.add(procura_cliente);
+		linha_procurar.add(btn_procurar);
 		botoes_CRUD.add(btn_novo);
 		botoes_CRUD.add(btn_editar);
 		botoes_CRUD.add(btn_excluir);
@@ -163,7 +172,7 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 			telefone_cliente.setText("");
 			btn_editar.setEnabled(false);
 			btn_excluir.setEnabled(false);
-		} else {
+		} else  if(ae.getActionCommand().equals("Excluir")){
 			nome_cliente.setEnabled(false);
 			endereco_cliente.setEnabled(false);
 			btn_editar.setEnabled(false);
@@ -173,6 +182,22 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 			nome_cliente.setText("");
 			endereco_cliente.setText("");
 			telefone_cliente.setText("");
+		} else {
+			String nome_procurado = procura_cliente.getText();
+			int indice_procurado;
+			indice_procurado = -1;
+			for(int index = 0; index < nomes_clientes.getSize(); index++) {
+				if(nome_procurado.equals(nomes_clientes.get(index))) {
+					indice_procurado = index;
+				}
+			}
+			procura_cliente.setText("");
+			if(indice_procurado != -1) {
+				jlst.setSelectedIndex(indice_procurado);
+			} else {
+				mensagemErroProcuraCliente();
+			}
+			
 		}
 	}
 	
@@ -192,5 +217,13 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		nome_cliente.setEnabled(true);
 		endereco_cliente.setEnabled(true);
 		telefone_cliente.setEnabled(true);
-	}		
+	}
+	
+	public void mensagemErroProcuraCliente() {
+		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR DADOS!\n "
+				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"
+				+ "1. Nome digitado está incompleto ou com erro\n"
+				+ "2. Cliente não existe", null, 
+				JOptionPane.ERROR_MESSAGE);
+	}
 }
