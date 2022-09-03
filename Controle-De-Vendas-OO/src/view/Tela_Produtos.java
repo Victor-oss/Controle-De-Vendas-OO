@@ -47,13 +47,13 @@ public class Tela_Produtos implements ActionListener{
 	
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Notebooks")) {
-			new Tela_Notebooks().mostrarTela(dados);
+			new Tela_Detalhe_Produtos().mostrarTela(dados, 1);
 		} else if(ae.getActionCommand().equals("Impressoras")) {
-			new Tela_Impressoras().mostrarTela(dados);
+			new Tela_Detalhe_Produtos().mostrarTela(dados, 2);
 		} else if(ae.getActionCommand().equals("Fones")) {
-			new Tela_Fones().mostrarTela(dados);
+			new Tela_Detalhe_Produtos().mostrarTela(dados, 3);
 		}  else {
-			new Tela_Consoles().mostrarTela(dados);			
+			new Tela_Detalhe_Produtos().mostrarTela(dados, 4);			
 		}	
 	}
 }

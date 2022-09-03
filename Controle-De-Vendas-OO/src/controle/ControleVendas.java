@@ -1,5 +1,4 @@
 package controle;
-import modelo.*;
 
 
 import javax.swing.DefaultListModel;

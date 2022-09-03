@@ -57,7 +57,6 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	private String end_cliente_proc;
 	private String tel_cliente_proc;
 	
-	private String prod_procurado;
 	private JCheckBox checkNot = new JCheckBox("Notebook");
 	private JCheckBox checkImp = new JCheckBox("Impressora");
 	private JCheckBox checkFone = new JCheckBox("Fone");
@@ -286,6 +285,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 			}					
 								
 		} else if (ae.getActionCommand().equals("Adicionar")) {
+			String prod_procurado;
 			try {
 				String produto_digitado = nome_prod.getText();
 				int n_produtos = Integer.parseInt(qtd_prod.getText());
@@ -480,7 +480,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 				+ "1. Data não colocada no formato XX/XX/XXXX, onde X corresponde a um dígito numérico\n"
 				+ "2. Data de vencimento é anterior a data de venda\n"
 				+ "3. Data de venda anterior ao dia atual\n"
-				+ "4. Data inexistente"
+				+ "4. Data inexistente\n"
 				+ "5. Nem todos os campos foram preenchidos", null, 
 				JOptionPane.ERROR_MESSAGE);
 	}

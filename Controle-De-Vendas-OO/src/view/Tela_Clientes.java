@@ -74,6 +74,8 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		telefone_cliente = new JTextField(15);
 		procura_cliente = new JTextField(15);
 		btn_procurar = new JButton("Procurar");
+		btn_procurar.setBackground(Color.green);
+		btn_procurar.setForeground(Color.WHITE);
 		btn_novo = new JButton("Novo");
 		btn_novo.setBackground(Color.green);
 		btn_novo.setForeground(Color.WHITE);

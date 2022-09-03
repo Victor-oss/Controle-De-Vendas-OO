@@ -1,7 +1,6 @@
 package controle;
 
 import static org.junit.jupiter.api.Assertions.*;
-import modelo.*;
 
 import org.junit.jupiter.api.Test;
 
