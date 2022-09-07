@@ -1,12 +1,5 @@
 package view;
-/**
- *	Classe Tela_Detalhe_Produto que permite que o usuário cadastre/insira/leia/exclua um notebook, console, fone-de-ouvido ou
- *	impressora dependendo do botão escolhido na tela de produtos *	     
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- * 	@see Tela_Produtos 
- */
+
 import javax.swing.*;
 import java.awt.*;
 import controle.*;
@@ -14,6 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+/**
+ *	Classe Tela_Detalhe_Produto que permite que o usuario cadastre/insira/leia/exclua um notebook, console, fone-de-ouvido ou
+ *	impressora dependendo do botao escolhido na tela de produtos	     
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ * 	@see Tela_Produtos 
+ */
 
 public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListener {
 	
@@ -49,9 +51,10 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	private ControleConsoles contConsoles;		
 		
 	/**
-	 * Método que mostra a tela do tipo de produto desejado com base na opção escolhida pelo cliente, se tipo igual a 1
-	 * a tela será de notebooks, se for 2 a tela será de impressoras, se for 3 a tela será de fones e se for 4 a tela será de 
-	 * consoles
+	 * Metodo que mostra a tela do tipo de produto desejado com base na opção escolhida pelo cliente
+	 * @param d Atributo que permite fazer a CRUD de um dos produtos disponiveis 
+	 * @param tipo Se tipo igual a 1 a tela sera de notebooks, se for 2 a tela sera de impressoras, se for 3 a tela sera de fones e 
+	 * se for 4 a tela sera de consoles
 	 */
 	public void mostrarTela(ControleDados d, int tipo) {
 		tipo_produto = tipo;
@@ -242,7 +245,7 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	}
 	
 	/**
-	 * Método responsável por detectar e responder ao clique do usuário em um componente de jlist
+	 * Metodo responsavel por detectar e responder ao clique do usuario em um componente de jlist
 	 */
 	public void valueChanged(ListSelectionEvent le) {
 		indice = jlst.getSelectedIndex();
@@ -302,7 +305,7 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	}	
 	
 	/**
-	 * Método responsável para que uma ação de CRUD seja realizada dependendo do botão clicado e dependendo do tipo de produto  
+	 * Metodo responsavel para que uma acao de CRUD seja realizada dependendo do botao clicado e dependendo do tipo de produto  
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Novo")) {
@@ -585,7 +588,7 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	}
 	
 	/**
-	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar um notebook
+	 * Metodo responsavel por exibir uma mensagem de erro caso alguma informacao na hora de criar ou editar um notebook
 	 * esteja errada
 	 */
 	public void mensagemErroCadastro() {
@@ -598,7 +601,7 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	}
 	
 	/**
-	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar uma impressora
+	 * Metodo responsavel por exibir uma mensagem de erro caso alguma informacao na hora de criar ou editar uma impressora
 	 * esteja errada
 	 */
 	public void mensagemErroCadastroImpressora() {
@@ -610,7 +613,7 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	}
 	
 	/**
-	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar um fone
+	 * Metodo responsavel por exibir uma mensagem de erro caso alguma informacao na hora de criar ou editar um fone
 	 * esteja errada
 	 */
 	public void mensagemErroCadastroFone() {
@@ -622,7 +625,7 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	}
 	
 	/**
-	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar um console
+	 * Metodo responsavel por exibir uma mensagem de erro caso alguma informacao na hora de criar ou editar um console
 	 * esteja errada
 	 */
 	public void mensagemErroCadastroConsole() {

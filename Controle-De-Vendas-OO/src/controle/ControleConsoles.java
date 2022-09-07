@@ -1,13 +1,15 @@
 package controle;
-/**
- *	Classe ControleConsoles que é responsável pelos gets de um console no package view       
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
+
 import javax.swing.DefaultListModel;
 
 import modelo.*;
+
+/**
+ *	Classe ControleConsoles que faz os gets de um console no package view       
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 public class ControleConsoles {
 	private Console_Video_Game[] c;

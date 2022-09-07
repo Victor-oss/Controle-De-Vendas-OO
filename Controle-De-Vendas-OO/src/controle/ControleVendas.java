@@ -1,13 +1,13 @@
 package controle;
 
+import javax.swing.DefaultListModel;
+
 /**
- *	Classe ControleVendas que é responsável pelos gets e procura de uma venda no package view     
- *	@author Victório Lázaro Rocha de Morais
+ *	Classe ControleVendas que faz os gets e procura de uma venda no package view
+ *	@author Victorio Lazaro Rocha de Morais
  *	@since 2022
  * 	@version 1.1
  */
-
-import javax.swing.DefaultListModel;
 
 public class ControleVendas {
 	private ControleDados dados;
@@ -101,10 +101,11 @@ public class ControleVendas {
 	}
 	
 	/**
-	 *	Pega a DefaultListModel<String> que está dentro da jlist na tela de vendas e transforma ela em um vetor para 
-	 * 	que seja possível passar esse vetor para criar uma nova venda      
- 	 *  @see TelaDetalheVenda
- 	 *  @return String[] 	
+	 *	Pega a DefaultListModel que esta dentro da jlist na tela de vendas e transforma ela em um vetor para 
+	 * 	que seja possivel passar esse vetor para criar uma nova venda   
+ 	 *  @return String[]
+ 	 *  @param produtos_carrinho E a lista de produtos que o usuario escolheu para comprar na venda 	
+ 	 *  
 	 */
 	public String[] converteEmArray(DefaultListModel<String> produtos_carrinho) {
 		String[] carrinho_array = new String[10]; 

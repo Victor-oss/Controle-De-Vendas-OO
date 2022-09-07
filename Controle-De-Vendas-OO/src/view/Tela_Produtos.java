@@ -1,10 +1,5 @@
 package view;
-/**
- *	Classe Tela_Produtos que é o menu onde o usuário pode decidir qual tela de produto deseja ver    
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
+
 import javax.swing.JButton;
 
 import javax.swing.JFrame;
@@ -13,6 +8,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controle.*;
+
+/**
+ *	Classe Tela_Produtos que e o menu onde o usuario pode decidir qual tela de produto deseja ver    
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 public class Tela_Produtos implements ActionListener{
 	private JFrame janela = new JFrame("Produtos");
@@ -23,7 +25,9 @@ public class Tela_Produtos implements ActionListener{
 	private ControleDados dados;
 	
 	/**
-	 * Método que mostra o menu de produtos 
+	 * Metodo que mostra o menu de produtos
+	 * @param d Atributo que permite acesso dessa tela ao banco de dados  
+	 * @see ControleDados 
 	 */
 	public void mostrarTela(ControleDados d) {
 		dados = d;

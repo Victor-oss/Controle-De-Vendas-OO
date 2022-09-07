@@ -2,7 +2,7 @@ package modelo;
 
 /**
  *	Classe Console_Video_Game que representa um video-game e herda da classe abstrata produto
- *	@author Victório Lázaro Rocha de Morais
+ *	@author Victorio Lazaro Rocha de Morais
  *	@since 2022
  * 	@version 1.1
  */

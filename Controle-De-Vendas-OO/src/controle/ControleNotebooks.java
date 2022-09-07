@@ -1,13 +1,15 @@
 package controle;
-/**
- *	Classe ControleNotebooks que é responsável pelos gets de um notebook no package view        
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
+
 import javax.swing.DefaultListModel;
 
 import modelo.*;
+
+/**
+ *	Classe ControleNotebooks que faz os gets de um notebook no package view        
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 public class ControleNotebooks {
 	private Notebook[] n;

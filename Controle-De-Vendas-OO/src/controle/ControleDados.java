@@ -1,11 +1,7 @@
 package controle;
-/**
- *	Classe ControleDados que é responsável por conectar a view a camada model      
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
+
 import modelo.*;
+
 
 
 import java.text.DateFormat;
@@ -15,7 +11,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-import javax.swing.DefaultListModel;
+/**
+ *	Classe ControleDados que conecta a view a camada model      
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 public class ControleDados {
 	/**
@@ -44,25 +45,33 @@ public class ControleDados {
 	}	
 		
 	/**
-	 *	Adiciona um cliente ao vetor de clientes na classe Dados usando um método da classe Dados
+	 *	Adiciona um cliente ao vetor de clientes na classe Dados usando um metodo da classe Dados
 	 *	@see Dados
+	 *	@param nome_novo Nome do novo cliente
+	 *	@param ende_novo Endereco do novo cliente
+	 *	@param tel_novo Telefone do novo cliente
 	 */
 	public void adicionarClientes(String nome_novo, String ende_novo, String tel_novo) {
 		this.d.adicionarClientes(new Cliente(nome_novo, ende_novo, tel_novo)); 
 	}
 	
 	/**
-	 *	Edita as informações de um cliente no vetor de clientes possuindo a posição do cliente no vetor
+	 *	Edita as informações de um cliente no vetor de clientes possuindo a posicao do cliente no vetor
 	 *	e usando um método da classe Dados
 	 *	@see Dados
+	 *	@param indice Indice do cliente que se deseja editar no vetor de clientes 
+	 *	@param nome_edit Nome editado do cliente tendo a posicao desse cliente no vetor
+	 * 	@param ende_edit Endereco editado do cliente tendo a posicao desse cliente no vetor
+	 *  @param tel_edit Telefone editado do cliente tendo a posicao desse cliente no vetor 	
 	 */
 	public void editarCliente(int indice, String nome_edit, String ende_edit, String tel_edit) {
 		this.d.editarCliente(indice, nome_edit, ende_edit, tel_edit);
 	}
 	
 	/**
-	 *	Exclui um cliente possuindo a posição do cliente no vetor e usando um método da classe Dados
+	 *	Exclui um cliente possuindo a posicao do cliente no vetor e usando um metodo da classe Dados
 	 *	@see Dados
+	 *	@param indice_excluido Indice do cliente que se deseja excluir
 	 */
 	public void excluirCliente(int indice_excluido) {
 		this.d.excluirCliente(indice_excluido);		
@@ -77,10 +86,17 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Adiciona um fone ao vetor de fones na classe Dados usando um método da classe Dados
+	 *	Adiciona um fone ao vetor de fones na classe Dados usando um metodo da classe Dados
 	 *	@see Dados
-	 * 	@throws NumberFormatException
+	 * 	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
 	 * 	@return boolean
+	 * 	@param nome_novo Nome do novo fone
+	 * 	@param fab_novo Fabricante do novo fone
+	 * 	@param vlvend_novo Valor de venda do novo fone
+	 * 	@param vlcust_novo Valor de custo do novo fone
+	 * 	@param tpfone_novo Tipo do novo fone
+	 * 	@param teccon_novo Tecnologia de conexao do novo fone
 	 */
 	public boolean adicionarFone(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String tpfone_novo, 
 			String teccon_novo) {
@@ -101,13 +117,22 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Edita as informações de um fone no vetor de fones possuindo a posição do fone no vetor
-	 *	e usando um método da classe Dados
+	 *	Edita as informacoes de um fone no vetor de fones possuindo a posicao do fone no vetor
+	 *	e usando um metodo da classe Dados
 	 *	@see Dados
-	 *	@throws NumberFormatException
+	 *	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
 	 *	@return boolean
+	 *	@param indice Indice do fone que se deseja editar no vetor de fones
+	 *	@param nome_edit Nome editado do fone tendo a posicao desse fone no vetor
+	 *	@param fab_edit Fabricante editado do novo fone
+	 * 	@param valvend_edit Valor de venda editado do novo fone
+	 * 	@param valcust_edit Valor de custo editado do novo fone
+	 * 	@param tp_fone_edit Tipo editado do novo fone
+	 * 	@param tec_con_edit Tecnologia de conexao editada do novo fone
 	 */
-	public boolean editarFone(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, String tp_fone_edit, String tec_con_edit) {
+	public boolean editarFone(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, 
+			String tp_fone_edit, String tec_con_edit) {
 		if(!nome_edit.isEmpty() && !fab_edit.isEmpty() && !valvend_edit.isEmpty() &&
 				!valcust_edit.isEmpty() && !tp_fone_edit.isEmpty() && !tec_con_edit.isEmpty()){
 				try {
@@ -125,8 +150,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Exclui um fone possuindo a posição do fone no vetor e usando um método da classe Dados
+	 *	Exclui um fone possuindo a posicao do fone no vetor e usando um metodo da classe Dados
 	 *	@see Dados
+	 *	@param indice_excluido Indice do fone que se deseja excluir
 	 */
 	public void excluirFone(int indice_excluido) {
 		this.d.excluirFone(indice_excluido);	
@@ -141,12 +167,20 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Adiciona um notebook ao vetor de notebooks na classe Dados usando um método da classe Dados
+	 *	Adiciona um notebook ao vetor de notebooks na classe Dados usando um metodo da classe Dados
 	 *	@see Dados
-	 * 	@throws NumberFormatException
+	 * 	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
 	 * 	@return boolean
+	 * 	@param nome_novo Nome do novo notebook
+	 * 	@param fab_novo Fabricante do novo notebook
+	 * 	@param vlvend_novo Valor de venda do novo notebook
+	 * 	@param vlcust_novo Valor de custo do novo notebook
+	 * 	@param arm_novo Armazenamento do novo notebook em GB
+	 * 	@param so_novo Sistema operacional do novo notebook
 	 */
-	public boolean adicionarNotebook(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String arm_novo, String so_novo) {
+	public boolean adicionarNotebook(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String arm_novo, 
+			String so_novo) {
 		if(!nome_novo.isEmpty() && !fab_novo.isEmpty() && !vlvend_novo.isEmpty() &&
 				!vlcust_novo.isEmpty() && !arm_novo.isEmpty() && !so_novo.isEmpty()){
 				try {
@@ -167,11 +201,20 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Edita as informações de um notebook no vetor de notebooks possuindo a posição do notebook no vetor
-	 *	e usando um método da classe Dados
+	 *	Edita as informacoes de um notebook no vetor de notebooks possuindo a posicao do notebook no vetor
+	 *	e usando um metodo da classe Dados
 	 *	@see Dados
-	 *	@throws NumberFormatException
+	 *	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
 	 *	@return boolean
+	 *	@param indice Indice do notebook que se deseja editar
+	 *	@param nome_edit Nome editado do notebook
+	 *	@param fab_edit Fabricante editado do notebook
+	 * 	@param valvend_edit Valor de venda editado do notebook
+	 * 	@param valcust_edit Valor de custo editado do notebook
+	 * 	@param arm_edit Armazenamento em GB editado do notebook
+	 * 	@param so_edit Sistema operacional editado do notebook
+	 *	
 	 */	
 	public boolean editarNotebook(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, 
 			String arm_edit, String so_edit) {
@@ -194,8 +237,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Exclui um notebook possuindo a posição do notebook no vetor e usando um método da classe Dados
+	 *	Exclui um notebook possuindo a posicao do notebook no vetor e usando um metodo da classe Dados
 	 *	@see Dados
+	 *	@param indice_excluido Indice do notebook que se deseja excluir
 	 */
 	public void excluirNotebook(int indice_excluido) {
 		this.d.excluirNotebook(indice_excluido);		
@@ -210,10 +254,17 @@ public class ControleDados {
 	}	
 		
 	/**
-	 *	Adiciona uma impressora ao vetor de impressoras na classe Dados usando um método da classe Dados
+	 *	Adiciona uma impressora ao vetor de impressoras na classe Dados usando um metodo da classe Dados
 	 *	@see Dados
-	 * 	@throws NumberFormatException
+	 * 	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
  	 *  @return boolean 	
+ 	 *  @param nome_novo Nome da nova impressora
+	 * 	@param fab_novo Fabricante da nova impressora
+	 * 	@param vlvend_novo Valor de venda da nova impressora
+	 * 	@param vlcust_novo Valor de custo da nova impressora
+	 * 	@param tec_imp_nova Tecnologia de impressao da nova impressora
+	 * 	@param tamfol_nova Tamanho da folha que a nova impressora imprime
 	 */
 	public boolean adicionarImp(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String tec_imp_nova, 
 			String tamfol_nova) {
@@ -234,11 +285,19 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Edita as informações de uma impressora no vetor de impressoras possuindo a posição da impressora no vetor
-	 *	e usando um método da classe Dados
+	 *	Edita as informacoes de uma impressora no vetor de impressoras possuindo a posicao da impressora no vetor
+	 *	e usando um metodo da classe Dados
 	 *	@see Dados
-	 *	@throws NumberFormatException
-	 *	@return boolean	
+	 *	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
+	 *	@return boolean
+	 *	@param indice Indice da impressora que se deseja editar
+	 *	@param nome_edit Nome editado da impressora
+	 *	@param fab_edit Fabricante editado da impressora
+	 * 	@param valvend_edit Valor de venda editado da impressora
+	 * 	@param valcust_edit Valor de custo editado da impressora
+	 * 	@param tec_imp_edit Tecnologia de impressao editada da impressora
+	 * 	@param tam_fol_edit Tamanho da folha editado que a impressora imprime	
 	 */
 	public boolean editarImpressora(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, 
 			String tec_imp_edit, String tam_fol_edit) {
@@ -260,8 +319,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Exclui uma impressora possuindo a posição da impressora no vetor e usando um método da classe Dados
+	 *	Exclui uma impressora possuindo a posicao da impressora no vetor e usando um metodo da classe Dados
 	 *	@see Dados
+	 *	@param indice_excluido Indice da impressora que se deseja excluir
 	 */
 	public void excluirImpressora(int indice_excluido) {
 		this.d.excluirImpressora(indice_excluido);		
@@ -276,10 +336,17 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Adiciona um console ao vetor de consoles na classe Dados usando um método da classe Dados
+	 *	Adiciona um console ao vetor de consoles na classe Dados usando um metodo da classe Dados
 	 *	@see Dados
-	 * 	@throws NumberFormatException
+	 * 	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
  	 *  @return boolean 	
+ 	 *  @param nome_novo Nome do novo console
+	 * 	@param fab_novo Fabricante do novo console
+	 * 	@param vlvend_novo Valor de venda do novo console
+	 * 	@param vlcust_novo Valor de custo do novo console
+	 * 	@param qtdcont_novo Quantidade de controles do novo console
+	 * 	@param qtdjogo_novo Quantidade jogos instalados previamente do novo console
 	 */
 	public boolean adicionarConsole(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String qtdcont_novo,
 			String qtdjogo_novo) {
@@ -302,11 +369,19 @@ public class ControleDados {
 	}	
 	
 	/**
-	 *	Edita as informações de um console no vetor de consoles possuindo a posição do console no vetor
-	 *	e usando um método da classe Dados
+	 *	Edita as informacoes de um console no vetor de consoles possuindo a posiçao do console no vetor
+	 *	e usando um metodo da classe Dados
 	 *	@see Dados
-	 *	@throws NumberFormatException
+	 *	@throws NumberFormatException Essa excecao e chamada quando os valores de venda nao tiverem sido digitados nos formatos
+	 * 	especificados
 	 *	@return boolean	
+	 *	@param indice Indice do console que se deseja editar
+	 *	@param nome_edit Nome editado do console
+	 *	@param fab_edit Fabricante editado do console
+	 * 	@param valvend_edit Valor de venda editado do console
+	 * 	@param valcust_edit Valor de custo editado do console
+	 * 	@param qtd_cont_edit Quantidade de controles editada do console
+	 * 	@param qtd_jogo_edit Quantidade de jogos instalados previamente editada do console
 	 */
 	public boolean editarConsole(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit,
 			String qtd_cont_edit, String qtd_jogo_edit) {
@@ -329,8 +404,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Exclui um console possuindo a posição do console no vetor e usando um método da classe Dados
+	 *	Exclui um console possuindo a posiçao do console no vetor e usando um metodo da classe Dados
 	 *	@see Dados
+	 *	@param indice_excluido Indice do console que se deseja excluir
 	 */
 	public void excluirConsole(int indice_excluido) {
 		this.d.excluirConsole(indice_excluido);		
@@ -341,10 +417,11 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Esse método estático verifica a veracidade das datas de venda e de vencimento de uma venda
-	 *	@throws NullPointerException
-	 *	@throws ParseException
+	 *	Esse metodo estatico verifica a veracidade das datas de venda e de vencimento de uma venda
+	 *	@throws NullPointerException Essa excecao e chamada quando algum valor e nulo
 	 *	@return boolean	
+	 *	@param dataVenda Data de venda que se deseja verificar
+	 * 	@param dataVencimento Data de vencimento que se deseja verificar
 	 */
 	public static boolean verificaDatas(String dataVenda, String dataVencimento) {
 		if(dataVenda.length() == 10 && dataVencimento.length() == 10 && !dataVenda.isEmpty() && !dataVencimento.isEmpty()) {
@@ -393,10 +470,18 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Adiciona uma venda ao vetor de vendas na classe Dados usando um método da classe Dados
+	 *	Adiciona uma venda ao vetor de vendas na classe Dados usando um metodo da classe Dados
 	 *	@see Dados
-	 * 	@throws NullPointerException
+	 * 	@throws NullPointerException Essa excecao e chamada quando algum valor e nulo 
  	 *  @return boolean 	
+ 	 *  @param nome_cliente Nome do cliente da nova venda
+	 * 	@param end_cliente Endereco do cliente da nova venda
+	 * 	@param tel_cliente Telefone do cliente da nova venda
+	 * 	@param data_venda Data de venda da nova venda
+	 * 	@param data_vencimento Data de vencimento do prazo para comecar a pagar a nova venda
+	 * 	@param valor_total Valor total da nova venda
+ 	 * 	@param qtd_meses Quantidade de meses em que o cliente quer parcelar a venda
+ 	 * 	@param produtos Vetor de Strings onde cada String contem o nome, quantidade e preco unitario de cada produto comprado   
 	 */
 	public boolean adicionarVenda(String nome_cliente, String end_cliente, String tel_cliente, String data_venda, 
 			String data_vencimento, double valor_total, String qtd_meses, String[] produtos) {
@@ -421,7 +506,8 @@ public class ControleDados {
 	}	
 	
 	/**
-	 *	Paga uma venda dado o índice da venda no vetor
+	 *	Paga uma venda dado o indice da venda no vetor
+	 *	@param indice_venda Indice da venda que se deseja pagar
 	 */	
 	public void pagaVenda(int indice_venda) {
 		this.d.getVendas()[indice_venda].pagarVenda();
@@ -460,8 +546,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Verifica se todas as parcelas de uma venda foram pagas e, se sim, o status muda para "Paga"
+	 *	Verifica se todas as parcelas de uma venda foram pagas e, se sim, paga a venda
  	 *  @return boolean 	
+ 	 *  @param indice_venda Indice da venda que se deseja verificar se todas as vendas foram pagas
 	 */
 	public boolean verificaVendaPaga(int indice_venda) {
 		return this.d.getVendas()[indice_venda].getPagamento().verificaTdsParcelasPagas();
@@ -472,10 +559,11 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Verifica se o nome digitado pelo usuário corresponde a um usuário existente no banco de dados e retorna o cliente
+	 *	Verifica se o nome digitado pelo usuario corresponde a um usuario existente no banco de dados e retorna o cliente
 	 *	caso ele exista 
- 	 *  @throws NullPointerException
+ 	 *  @throws NullPointerException Essa excecao e chamada quando alguma posicao do vetor de clientes e chamada e ela e nula 
  	 *  @return String 	
+ 	 *  @param nome_digitado Nome do cliente procurado 
 	 */
 	public String procuraNomeCliente(String nome_digitado) {
 		try {
@@ -494,8 +582,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Retorna o endereço do cliente procuradon
+	 *	Retorna o endereço do cliente procurado
  	 *  @return String 	
+ 	 *  @param nome_digitado Nome do cliente que se deseja procurar o endereco
 	 */
 	public String procuraEndCliente(String nome_digitado) {
 		Cliente[] c = this.d.getClientes();
@@ -510,8 +599,9 @@ public class ControleDados {
 	}
 	
 	/**
-	 *	Retorna o telefone do cliente procuradon
- 	 *  @return String 	
+	 *	Retorna o telefone do cliente procurado
+ 	 *  @return String 
+ 	 *  @param nome_digitado Nome do cliente que se deseja procurar o telefone  	
 	 */
 	public String procuraTelCliente(String nome_digitado) {
 		Cliente[] c = this.d.getClientes();
@@ -527,7 +617,8 @@ public class ControleDados {
 	
 	/**
 	 *	Retorna o nome do notebook procurado
- 	 *  @return String 	
+ 	 *  @return String 
+ 	 *  @param not_digitado Nome do notebook procurado	
 	 */
 	public String procuraNomeNotebook(String not_digitado) {
 		Notebook[] n = this.d.getNotebooks();
@@ -544,6 +635,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o preço do notebook procurado dado o nome do notebook
  	 *  @return double 	
+ 	 *  @param not_digitado Nome do notebook que se deseja procurar o preco
 	 */
 	public double procuraPrecoNotebook(String not_digitado) {
 		Notebook[] n = this.d.getNotebooks();
@@ -560,6 +652,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o nome do console procurado
  	 *  @return String 	
+ 	 *  @param con_digitado Nome do console procurado
 	 */
 	public String procuraNomeConsole(String con_digitado) {
 		Console_Video_Game[] g = this.d.getConsoles();  
@@ -576,6 +669,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o preço do console procurado dado o nome do console
  	 *  @return double 	
+ 	 *  @param con_digitado Nome do console que se deseja procurar o preco
 	 */
 	public double procuraPrecoConsole(String con_digitado) {
 		Console_Video_Game[] g = this.d.getConsoles();  
@@ -592,6 +686,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o nome da impressora procurada
  	 *  @return String 	
+ 	 *  @param imp_digitada Nome da impressora procurada	
 	 */
 	public String procuraNomeImpressora(String imp_digitada) {
 		Impressora imp_procurada = new Impressora();
@@ -608,6 +703,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o preço da impressora procurada dado o nome da impressora
  	 *  @return double 	
+ 	 *  @param imp_digitada Nome da impressora que se deseja procurar o preco
 	 */
 	public double procuraPrecoImpressora(String imp_digitada) {
 		Impressora imp_procurada = new Impressora();
@@ -624,6 +720,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o nome do fone procurado
  	 *  @return String 	
+ 	 *  @param fone_digitado Nome do fone procurado	
 	 */
 	public String procuraNomeFone(String fone_digitado) {
 		Fone[] f = this.d.getFones(); 
@@ -640,6 +737,7 @@ public class ControleDados {
 	/**
 	 *	Retorna o preço do fone procurado dado o nome do fone
  	 *  @return double 	
+ 	 *  @param fone_digitado Nome do fone que se deseja procurar o preco
 	 */
 	public double procuraPrecoFone(String fone_digitado) {
 		Fone[] f = this.d.getFones(); 
@@ -655,7 +753,9 @@ public class ControleDados {
 	
 		
 	/**
-	 * Utilizado para pagar uma parcela caso o usuário decida declarar essa parcela dado o índice da parcela e o índice da venda 
+	 * Utilizado para pagar uma parcela caso o usuário decida declarar essa parcela dado o índice da parcela e o índice da venda
+	 * @param indice_venda Indice da venda no vetor de vendas
+	 * @param indice_parcela Indice da parcela que se deseja pagar no vetor de parcelas da venda escolhida
 	 */
 	public void pagarParcela(int indice_venda, int indice_parcela) {
 		Venda[] vendas = this.d.getVendas();
@@ -680,9 +780,10 @@ public class ControleDados {
 	}
 	
 	/**
-	 *  Método responsável pela exclusão de uma venda do banco de dados dado o índice da venda e utilizando um método da classe
+	 *  Metodo responsavel pela exclusao de uma venda do banco de dados dado o indice da venda e utilizando um metodo da classe
 	 *  Dados
 	 *  @see Dados
+	 *  @param indice_sel Indice da venda que seja excluir 
 	 */
 	public void excluirVenda(int indice_sel) {
 		this.d.excluirVenda(indice_sel);

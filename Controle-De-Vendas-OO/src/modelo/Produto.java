@@ -1,5 +1,12 @@
 package modelo;
 
+/**
+ *	Classe Produto que e pai de todos os produtos da loja
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 public abstract class Produto {
 	protected String nome;
 	protected String fabricante;

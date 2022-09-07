@@ -1,15 +1,16 @@
 package modelo;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
- *	Classe Pagamento que representa um pagamento de uma venda e que é atributo da classe Venda
- *	@author Victório Lázaro Rocha de Morais
+ *	Classe Pagamento que representa um pagamento de uma venda e que e atributo da classe Venda
+ *	@author Victorio Lazaro Rocha de Morais
  *	@since 2022
  * 	@version 1.1
  */
 
-import java.util.Calendar;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+
 
 public class Pagamento {
 	private String data_venda;
@@ -85,8 +86,9 @@ public class Pagamento {
 	}
 	
 	/**
-	 *	Retorna o status de determinada parcela dado o índice da parcela
+	 *	Retorna o status de determinada parcela dado o indice da parcela
 	 * 	@return String
+	 * 	@param indice_parc Indice da parcela que se deseja editar
 	 */
 	public String getStatusParcela(int indice_parc) {
 		return this.parcelas[indice_parc].getStatus();

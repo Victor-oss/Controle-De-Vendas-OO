@@ -1,10 +1,5 @@
 package view;
-/**
- *	Classe Tela_Clientes que é responsável pela tela onde é possível ler/inserir/editar/excluir um cliente     
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +8,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import controle.*;
 
+/**
+ *	Classe Tela_Clientes que e responsavel pela tela onde e possivel ler/inserir/editar/excluir um cliente     
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 public class Tela_Clientes implements ActionListener, ListSelectionListener{
 	private JList<String> jlst;	
@@ -36,7 +37,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 	private static ControleClientes contClientes;
 	
 	/**
-	 * Método que mostra a tela de clientes 
+	 * Metodo que mostra a tela de clientes
+	 * @param d Atributo que permite fazer a CRUD de clientes no banco de dados usando essa tela como interface  
+	 * @see ControleDados
 	 */
 	public void mostrarTela(ControleDados d){		
 		dados = d;
@@ -239,7 +242,7 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 	}
 	
 	/**
-	 * Método responsável por exibir uma mensagem de erro caso o cliente procurado não tenha sido encontrado
+	 * Metodo responsavel por exibir uma mensagem de erro caso o cliente procurado nao tenha sido encontrado
 	 */
 	public void mensagemErroProcuraCliente() {
 		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR DADOS!\n "

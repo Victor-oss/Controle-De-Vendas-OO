@@ -1,48 +1,51 @@
 package controle;
 
-/**
- *	Classe Testes que é responsável pelos testes unitários  
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ *	Classe Testes que e responsavel pelos testes unitarios  
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 class Testes {
 
 	/**
-	 * Método para verificar se o método verificaDatas está analisando as datas de maneira certa  
+	 * Metodo para verificar se o metodo verificaDatas esta analisando as datas de maneira certa  
+	 * @see ControleDados
 	 */
 	@Test
 	void verificaDatasTeste () throws Exception {
-		String vend1 = "29/08/2022";
-		String venc1 = "29/09/2022";
+		String vend1 = "29/09/2022";
+		String venc1 = "29/10/2022";
 		assertTrue(ControleDados.verificaDatas(vend1, venc1));
-		String vend2 = "29/08/2022";
-		String venc2 = "29/08/2022";
+		String vend2 = "29/10/2022";
+		String venc2 = "29/10/2022";
 		assertTrue(ControleDados.verificaDatas(vend2, venc2));
-		String vend3 = "29/08/2022";
-		String venc3 = "29/07/2022";
+		String vend3 = "29/10/2022";
+		String venc3 = "29/09/2022";
 		assertFalse(ControleDados.verificaDatas(vend3, venc3));
-		String vend4 = "31/08/2022";
-		String venc4 = "31/09/2022";
+		String vend4 = "31/09/2022";
+		String venc4 = "31/10/2022";
 		assertFalse(ControleDados.verificaDatas(vend4, venc4));
-		String vend5 = "29/08/2022";
+		String vend5 = "29/09/2022";
 		String venc5 = "29/02/2023";
 		assertFalse(ControleDados.verificaDatas(vend5, venc5));
-		String vend6 = "29/08//2022";
+		String vend6 = "29/09//2022";
 		String venc6 = "28/02/2023";
 		assertFalse(ControleDados.verificaDatas(vend6, venc6));
-		String vend7 = "28/08/2022";
+		String vend7 = "29/08/2022";
 		String venc7 = "29/08/2023";
 		assertFalse(ControleDados.verificaDatas(vend7, venc7));
 	}
 	
 	/**
-	 * Método para verificar se o método procuraNomeCliente está funcionando da maneira desejada  
+	 * Metodo para verificar se o metodo procuraNomeCliente está funcionando da maneira desejada
+	 * @see ControleDados  
 	 */
 	@Test
 	void verificaNomeCliente() throws Exception {
@@ -59,7 +62,8 @@ class Testes {
 
 	
 	/**
-	 * Método para verificar se os métodos adicionarConsole e editarConsole está funcionando da maneira desejada  
+	 * Metodo para verificar se os metodos adicionarConsole e editarConsole estao funcionando da maneira desejada
+	 * @see ControleDados  
 	 */
 	@Test
 	void inserirEditarConsole() throws Exception {

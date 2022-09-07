@@ -1,14 +1,15 @@
 package view;
-/**
- *	Classe Tela_Menu que é responsável pelo menu inicial da aplicação   
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- */
 import java.awt.Color;
 import java.awt.event.*;
 import controle.*;
 import javax.swing.*;
+
+/**
+ *	Classe Tela_Menu que e responsavel pelo menu inicial da aplicacao   
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 public class Tela_Menu implements ActionListener{
 	private JFrame janela = new JFrame();
@@ -19,7 +20,7 @@ public class Tela_Menu implements ActionListener{
 	private ControleDados d = new ControleDados();
 	
 	/**
-	 * Método construtor que imprime a tela de menu
+	 * Metodo construtor que imprime a tela de menu
 	 */
 	public Tela_Menu() {
 		janela.setSize(400, 230);
@@ -45,6 +46,9 @@ public class Tela_Menu implements ActionListener{
 		janela.setVisible(true);
 	}
 	
+	/**
+	 * Metodo que direciona o usuario para uma tela diferente dependendo do botao clicado
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Clientes")) {
 			new Tela_Clientes().mostrarTela(d);

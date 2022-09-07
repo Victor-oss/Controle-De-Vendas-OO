@@ -1,11 +1,5 @@
 package view;
-/**
- *	Classe Tela_Vendas que permite que o usuário visualize as vendas registradas no banco de dados, podendo criar uma nova
- *	ou ver o status de uma venda      
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1 
- */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +8,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import controle.*;
 
+/**
+ *	Classe Tela_Vendas que permite que o usuario visualize as vendas registradas no banco de dados, podendo criar uma nova
+ *	ou ver o status de uma venda      
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1 
+ */
 
 public class Tela_Vendas implements ActionListener, ListSelectionListener{
 	private JList<String> jlst;	
@@ -26,7 +27,9 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 	private static ControleVendas contVendas;
 	
 	/**
-	 * Método que mostra a tela com a vendas registradas
+	 * Metodo que mostra a tela com a vendas registradas
+	 * @param d Atributo que permite acesso dessa tela ao banco de dados 
+	 * @see ControleDados
 	 */
 	public void mostrarTela(ControleDados d){		
 		dados = d;
@@ -62,8 +65,8 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 	}
 	
 	/**
-	 * Método responsável para que um usuário cadastre uma venda ou recarregue a jlist para acompanhar as atualizações nas vendas
-	 * dependendo do botão clicado 
+	 * Metodo responsavel para que um usuario cadastre uma venda ou recarregue a jlist para acompanhar as atualizacoes nas vendas
+	 * dependendo do botao clicado 
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Nova")) {
@@ -79,7 +82,7 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 	}	
 	
 	/**
-	 * Método responsável por detectar e responder ao clique do usuário em um componente de jlist
+	 * Metodo responsavel por detectar e responder ao clique do usuario em um componente de jlist
 	 */
 	public void valueChanged(ListSelectionEvent le) {
 		if(!le.getValueIsAdjusting()) {

@@ -1,12 +1,5 @@
 package view;
-/**
- *	Classe TelaDetalheVenda que permite que o usuário crie, pague parcelas ou exclua uma venda dependendo da ação realizada na 
- * 	tela com o menu de vendas      
- *	@author Victório Lázaro Rocha de Morais
- *	@since 2022
- * 	@version 1.1
- * 	@see Tela_Vendas 
- */
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,6 +25,15 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
 import controle.*;
+
+/**
+ *	Classe TelaDetalheVenda que permite que o usuario crie, pague parcelas ou exclua uma venda dependendo da acao realizada na 
+ * 	tela com o menu de vendas      
+ *	@author Victorio Lazaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ * 	@see Tela_Vendas 
+ */
 
 public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelectionListener{
 	private JList<String> jlst;
@@ -73,9 +75,16 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	private double valor_venda = 0;
 	
 	/**
-	 * Método que mostra uma tela para cadastrar uma venda ou uma para pagar parcelas ou excluir uma venda dependendo
-	 * da operação realizada na tela anterior. Se operacao é 1, o cliente vai para a tela de cadastro. Se for 2, ele vai para
-	 * a tela com as informações uma venda já cadastrada
+	 * Metodo que mostra uma tela para cadastrar uma venda ou uma para pagar parcelas ou excluir uma venda dependendo
+	 * da operacao realizada na tela anterior. 
+	 * @param cv Atributo que permite fazer os gets no banco de dados das informacoes das vendas cadastradas
+	 * @param d Atributo que permite fazer a CRUD de produtos no banco de dados usando essa tela como interface
+	 * @param operacao Se operacao e 1, o cliente vai para a tela de cadastro. Se for 2, ele vai para
+	 * a tela com as informacoes uma venda ja cadastrada  
+	 * @param indice_sel Esse indice e necessario apenas quando se deseja visualizar as informacoes de uma venda cadastrada e
+	 * possamos fazer as requisicoes no banco de dados usando o indice da venda escolhida
+	 * @see ControleDados
+	 * @see ControleVendas 
 	 */
 	public void mostrarTela(ControleDados d, ControleVendas cv, int operacao, int indice_sel){		
 		dados = d;
@@ -251,7 +260,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método para deixar a tela com as informações de um jeito que é exigido muitas vezes nessa classe, logo foi feito um método
+	 * Metodo para deixar a tela com as informacoes de um jeito que e exigido muitas vezes nessa classe, logo foi feito um metodo
 	 * para evitar linhas repetidas   
 	 */
 	public void limparTd() {
@@ -285,7 +294,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método responsável por realizar uma ação dependendo do botão clicado
+	 * Metodo responsavel por realizar uma acao dependendo do botao clicado
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Procurar")) {
@@ -405,7 +414,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método que detecta ações no checkbox
+	 * Metodo que detecta acoes no checkbox
 	 */
 	public void itemStateChanged(ItemEvent evento) {
 		nome_prod.setEnabled(true);
@@ -473,7 +482,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método para detectar ações na lista de parcelas na tela de visualização de uma venda previamente cadastrada
+	 * Metodo para detectar acoes na lista de parcelas na tela de visualizacao de uma venda previamente cadastrada
 	 */
 	public void valueChanged(ListSelectionEvent le) {
 		indice_parcela = jlst2.getSelectedIndex();
@@ -481,7 +490,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método que exibe uma mensagem de erro caso ocorra algum problema na hora de buscar um cliente existente 
+	 * Metodo que exibe uma mensagem de erro caso ocorra algum problema na hora de buscar um cliente existente 
 	 */
 	public void mensagemErroCliente() {
 		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR CLIENTE!\n "
@@ -492,7 +501,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método que exibe uma mensagem de erro caso o usuário não adicione um número inteiro na JTextField
+	 * Metodo que exibe uma mensagem de erro caso o usuario nao adicione um numero inteiro na JTextField
 	 * para definir a quantidade de produtos que ele deseja comprar 
 	 */
 	public void mensagemErroQtdProdutos() {
@@ -502,7 +511,7 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	}
 	
 	/**
-	 * Método que exibe uma mensagem de erro caso ocorra um problema na hora de buscar um produto para adicionar ao carrinho
+	 * Metodo que exibe uma mensagem de erro caso ocorra um problema na hora de buscar um produto para adicionar ao carrinho
 	 */
 	public void mensagemErroProduto() {
 		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR PRODUTO!\n "

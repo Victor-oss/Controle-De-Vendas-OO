@@ -2,7 +2,7 @@ package modelo;
 
 /**
  *	Classe Fone que representa um fone de ouvido e herda da classe abstrata produto
- *	@author Victório Lázaro Rocha de Morais
+ *	@author Victorio Lazaro Rocha de Morais
  *	@since 2022
  * 	@version 1.1
  */

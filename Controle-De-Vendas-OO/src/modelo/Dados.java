@@ -274,7 +274,7 @@ public class Dados {
 	}	
 	
 	/**
-	 * Edita as informações de um console dado a posição do console no vetor  
+	 * Edita as informacoes de um console dado a posição do console no vetor  
 	 */
 	public void editarConsole(int indice, String nome_edit, String fab_edit, double valcust_edit, double valvend_edit, int qtd_cont_edit, int qtd_jogo_edit) {
 		this.consoles_video_game[indice].setNome(nome_edit);
