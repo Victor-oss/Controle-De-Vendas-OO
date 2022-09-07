@@ -1,4 +1,10 @@
 package controle;
+/**
+ *	Classe ControleFones que é responsável pelos gets de um fone no package view         
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 import javax.swing.DefaultListModel;
 
 import modelo.*;

@@ -1,11 +1,21 @@
 package controle;
 
+/**
+ *	Classe Testes que é responsável pelos testes unitários  
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 class Testes {
 
+	/**
+	 * Método para verificar se o método verificaDatas está analisando as datas de maneira certa  
+	 */
 	@Test
 	void verificaDatasTeste () throws Exception {
 		String vend1 = "29/08/2022";
@@ -31,6 +41,9 @@ class Testes {
 		assertFalse(ControleDados.verificaDatas(vend7, venc7));
 	}
 	
+	/**
+	 * Método para verificar se o método procuraNomeCliente está funcionando da maneira desejada  
+	 */
 	@Test
 	void verificaNomeCliente() throws Exception {
 		ControleDados d = new ControleDados();
@@ -44,6 +57,10 @@ class Testes {
 		assertNull(d.procuraNomeCliente(cliente4));
 	}
 
+	
+	/**
+	 * Método para verificar se os métodos adicionarConsole e editarConsole está funcionando da maneira desejada  
+	 */
 	@Test
 	void inserirEditarConsole() throws Exception {
 		ControleDados d = new ControleDados();

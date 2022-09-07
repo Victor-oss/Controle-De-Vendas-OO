@@ -5,11 +5,7 @@ public abstract class Produto {
 	protected String fabricante;
 	protected double valor_custo;
 	protected double valor_venda;
-	
-	public Produto(){
-		super();
-	}
-	
+		
 	public String getNome() {
 		return this.nome;
 	}

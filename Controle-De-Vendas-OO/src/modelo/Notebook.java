@@ -1,5 +1,12 @@
 package modelo;
 
+/**
+ *	Classe Notebook que representa um notebook e herda da classe abstrata produto
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 public class Notebook extends Produto{
 	private int armazenamento;
 	private String sistema_op;

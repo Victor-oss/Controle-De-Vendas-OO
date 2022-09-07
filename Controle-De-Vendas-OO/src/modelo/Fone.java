@@ -1,5 +1,12 @@
 package modelo;
 
+/**
+ *	Classe Fone que representa um fone de ouvido e herda da classe abstrata produto
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 public class Fone extends Produto{
 	private String tipo_fone;
 	private String tec_conexao;
@@ -32,4 +39,5 @@ public class Fone extends Produto{
 	public void setTecConexao(String tec_conexao) {
 		this.tec_conexao = tec_conexao;
 	}
+	
 }

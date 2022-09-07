@@ -1,4 +1,10 @@
 package view;
+/**
+ *	Classe Tela_Clientes que é responsável pela tela onde é possível ler/inserir/editar/excluir um cliente     
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,6 +35,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 	private static ControleDados dados;
 	private static ControleClientes contClientes;
 	
+	/**
+	 * Método que mostra a tela de clientes 
+	 */
 	public void mostrarTela(ControleDados d){		
 		dados = d;
 		contClientes = new ControleClientes(dados);
@@ -131,6 +140,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		jf.setVisible(true);
 	}
 	
+	/**
+	 * Método responsável para que uma ação de CRUD seja realizada dependendo do botão clicado  
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Novo")) {
 			nome_cliente.setText("");
@@ -144,14 +156,16 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 			btn_excluir.setEnabled(false);
 			btn_editar.setEnabled(false);
 		} else if(ae.getActionCommand().equals("Salvar")) {
-			String nome_novo = nome_cliente.getText(); 
-			String ende_novo = endereco_cliente.getText();
-			String tel_novo = telefone_cliente.getText();
-			dados.adicionarClientes(nome_novo, ende_novo, tel_novo);
-			nomes_clientes.addElement(nome_novo);
-			nome_cliente.setText("");
-			endereco_cliente.setText("");
-			telefone_cliente.setText("");
+				String nome_novo = nome_cliente.getText(); 
+				String ende_novo = endereco_cliente.getText();
+				String tel_novo = telefone_cliente.getText();
+				if(!nome_novo.isEmpty() && !ende_novo.isEmpty() && !tel_novo.isEmpty()) {
+					dados.adicionarClientes(nome_novo, ende_novo, tel_novo);
+					nomes_clientes.addElement(nome_novo);
+					nome_cliente.setText("");
+					endereco_cliente.setText("");
+					telefone_cliente.setText("");
+				}					
 		} else if(ae.getActionCommand().equals("Cancelar")) {
 			nome_cliente.setText("");
 			endereco_cliente.setText("");
@@ -203,6 +217,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		}
 	}
 	
+	/**
+	 * Método responsável por detectar e responder ao clique do usuário em um componente de jlist
+	 */
 	public void valueChanged(ListSelectionEvent le) {
 		indice = jlst.getSelectedIndex();
 		if(indice < 0 || indice >= nomes_clientes.getSize()) {
@@ -221,6 +238,9 @@ public class Tela_Clientes implements ActionListener, ListSelectionListener{
 		telefone_cliente.setEnabled(true);
 	}
 	
+	/**
+	 * Método responsável por exibir uma mensagem de erro caso o cliente procurado não tenha sido encontrado
+	 */
 	public void mensagemErroProcuraCliente() {
 		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR DADOS!\n "
 				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"

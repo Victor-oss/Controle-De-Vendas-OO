@@ -1,5 +1,11 @@
 package controle;
 
+/**
+ *	Classe ControleVendas que é responsável pelos gets e procura de uma venda no package view     
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 
 import javax.swing.DefaultListModel;
 
@@ -94,6 +100,12 @@ public class ControleVendas {
 		return this.dados.procuraPrecoFone(fone_digitado);
 	}
 	
+	/**
+	 *	Pega a DefaultListModel<String> que está dentro da jlist na tela de vendas e transforma ela em um vetor para 
+	 * 	que seja possível passar esse vetor para criar uma nova venda      
+ 	 *  @see TelaDetalheVenda
+ 	 *  @return String[] 	
+	 */
 	public String[] converteEmArray(DefaultListModel<String> produtos_carrinho) {
 		String[] carrinho_array = new String[10]; 
 		for(int i = 0; i<produtos_carrinho.getSize(); i++) {

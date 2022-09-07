@@ -1,4 +1,10 @@
 package view;
+/**
+ *	Classe Tela_Menu que é responsável pelo menu inicial da aplicação   
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 import java.awt.Color;
 import java.awt.event.*;
 import controle.*;
@@ -12,6 +18,9 @@ public class Tela_Menu implements ActionListener{
 	private JButton btn_vendas = new JButton("Vendas");
 	private ControleDados d = new ControleDados();
 	
+	/**
+	 * Método construtor que imprime a tela de menu
+	 */
 	public Tela_Menu() {
 		janela.setSize(400, 230);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		

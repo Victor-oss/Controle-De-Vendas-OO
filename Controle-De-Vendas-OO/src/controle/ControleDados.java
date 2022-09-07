@@ -1,5 +1,12 @@
 package controle;
+/**
+ *	Classe ControleDados que é responsável por conectar a view a camada model      
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 import modelo.*;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,6 +18,9 @@ import java.util.Calendar;
 import javax.swing.DefaultListModel;
 
 public class ControleDados {
+	/**
+	 *	Atributo da classe Dados que fornece um banco de dados para a aplicação
+	 */
 	private Dados d = new Dados();
 	
 	public ControleDados() {
@@ -20,11 +30,11 @@ public class ControleDados {
 	public Dados getDados() {
 		return d;
 	}
+	
 	public void setDados(Dados d) {
 		this.d = d;
 	}
 	
-	//Clientes	
 	public Cliente[] getClientes() {
 		return this.d.getClientes();
 	}
@@ -33,19 +43,31 @@ public class ControleDados {
 		return this.d.getClientesSize();
 	}	
 		
+	/**
+	 *	Adiciona um cliente ao vetor de clientes na classe Dados usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void adicionarClientes(String nome_novo, String ende_novo, String tel_novo) {
 		this.d.adicionarClientes(new Cliente(nome_novo, ende_novo, tel_novo)); 
 	}
 	
+	/**
+	 *	Edita as informações de um cliente no vetor de clientes possuindo a posição do cliente no vetor
+	 *	e usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void editarCliente(int indice, String nome_edit, String ende_edit, String tel_edit) {
 		this.d.editarCliente(indice, nome_edit, ende_edit, tel_edit);
 	}
 	
+	/**
+	 *	Exclui um cliente possuindo a posição do cliente no vetor e usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void excluirCliente(int indice_excluido) {
 		this.d.excluirCliente(indice_excluido);		
 	}
 	
-	//Fones
 	public Fone[] getFones(){
 		return this.d.getFones();
 	}
@@ -54,7 +76,14 @@ public class ControleDados {
 		return this.d.getFonesSize();
 	}
 	
-	public boolean adicionarFone(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String tpfone_novo, String teccon_novo) {
+	/**
+	 *	Adiciona um fone ao vetor de fones na classe Dados usando um método da classe Dados
+	 *	@see Dados
+	 * 	@throws NumberFormatException
+	 * 	@return boolean
+	 */
+	public boolean adicionarFone(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String tpfone_novo, 
+			String teccon_novo) {
 		if(!nome_novo.isEmpty() && !fab_novo.isEmpty() && !vlvend_novo.isEmpty() &&
 				!vlcust_novo.isEmpty() && !tpfone_novo.isEmpty() && !teccon_novo.isEmpty()){
 				try {
@@ -71,6 +100,13 @@ public class ControleDados {
 		}
 	}
 	
+	/**
+	 *	Edita as informações de um fone no vetor de fones possuindo a posição do fone no vetor
+	 *	e usando um método da classe Dados
+	 *	@see Dados
+	 *	@throws NumberFormatException
+	 *	@return boolean
+	 */
 	public boolean editarFone(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, String tp_fone_edit, String tec_con_edit) {
 		if(!nome_edit.isEmpty() && !fab_edit.isEmpty() && !valvend_edit.isEmpty() &&
 				!valcust_edit.isEmpty() && !tp_fone_edit.isEmpty() && !tec_con_edit.isEmpty()){
@@ -88,11 +124,14 @@ public class ControleDados {
 		}		
 	}
 	
+	/**
+	 *	Exclui um fone possuindo a posição do fone no vetor e usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void excluirFone(int indice_excluido) {
 		this.d.excluirFone(indice_excluido);	
 	}
 	
-	//Notebooks
 	public Notebook[] getNotebooks() {
 		return this.d.getNotebooks();
 	}
@@ -101,6 +140,12 @@ public class ControleDados {
 		return this.d.getNotebooksSize();
 	}
 	
+	/**
+	 *	Adiciona um notebook ao vetor de notebooks na classe Dados usando um método da classe Dados
+	 *	@see Dados
+	 * 	@throws NumberFormatException
+	 * 	@return boolean
+	 */
 	public boolean adicionarNotebook(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String arm_novo, String so_novo) {
 		if(!nome_novo.isEmpty() && !fab_novo.isEmpty() && !vlvend_novo.isEmpty() &&
 				!vlcust_novo.isEmpty() && !arm_novo.isEmpty() && !so_novo.isEmpty()){
@@ -121,6 +166,13 @@ public class ControleDados {
 		
 	}
 	
+	/**
+	 *	Edita as informações de um notebook no vetor de notebooks possuindo a posição do notebook no vetor
+	 *	e usando um método da classe Dados
+	 *	@see Dados
+	 *	@throws NumberFormatException
+	 *	@return boolean
+	 */	
 	public boolean editarNotebook(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, 
 			String arm_edit, String so_edit) {
 		if(!nome_edit.isEmpty() && !fab_edit.isEmpty() && !valvend_edit.isEmpty() &&
@@ -141,11 +193,14 @@ public class ControleDados {
 		
 	}
 	
+	/**
+	 *	Exclui um notebook possuindo a posição do notebook no vetor e usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void excluirNotebook(int indice_excluido) {
 		this.d.excluirNotebook(indice_excluido);		
 	}
-	
-	//Impressoras
+		
 	public Impressora[] getImps() {
 		return this.d.getImps();
 	}
@@ -154,6 +209,12 @@ public class ControleDados {
 		return this.d.getImpsSize();
 	}	
 		
+	/**
+	 *	Adiciona uma impressora ao vetor de impressoras na classe Dados usando um método da classe Dados
+	 *	@see Dados
+	 * 	@throws NumberFormatException
+ 	 *  @return boolean 	
+	 */
 	public boolean adicionarImp(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String tec_imp_nova, 
 			String tamfol_nova) {
 		if(!nome_novo.isEmpty() && !fab_novo.isEmpty() && !vlvend_novo.isEmpty() &&
@@ -172,6 +233,13 @@ public class ControleDados {
 		}		 
 	}
 	
+	/**
+	 *	Edita as informações de uma impressora no vetor de impressoras possuindo a posição da impressora no vetor
+	 *	e usando um método da classe Dados
+	 *	@see Dados
+	 *	@throws NumberFormatException
+	 *	@return boolean	
+	 */
 	public boolean editarImpressora(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit, 
 			String tec_imp_edit, String tam_fol_edit) {
 		if(!nome_edit.isEmpty() && !fab_edit.isEmpty() && !valvend_edit.isEmpty() &&
@@ -191,11 +259,14 @@ public class ControleDados {
 		
 	}
 	
+	/**
+	 *	Exclui uma impressora possuindo a posição da impressora no vetor e usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void excluirImpressora(int indice_excluido) {
 		this.d.excluirImpressora(indice_excluido);		
 	}
 	
-	//Consoles Video Game
 	public Console_Video_Game[] getConsoles() {
 		return d.getConsoles();
 	}
@@ -203,7 +274,13 @@ public class ControleDados {
 	public int getConsolesSize() {
 		return d.getConsolesSize();
 	}
-		
+	
+	/**
+	 *	Adiciona um console ao vetor de consoles na classe Dados usando um método da classe Dados
+	 *	@see Dados
+	 * 	@throws NumberFormatException
+ 	 *  @return boolean 	
+	 */
 	public boolean adicionarConsole(String nome_novo, String fab_novo, String vlvend_novo, String vlcust_novo, String qtdcont_novo,
 			String qtdjogo_novo) {
 		if(!nome_novo.isEmpty() && !fab_novo.isEmpty() && !vlvend_novo.isEmpty() &&
@@ -224,6 +301,13 @@ public class ControleDados {
 		}		 
 	}	
 	
+	/**
+	 *	Edita as informações de um console no vetor de consoles possuindo a posição do console no vetor
+	 *	e usando um método da classe Dados
+	 *	@see Dados
+	 *	@throws NumberFormatException
+	 *	@return boolean	
+	 */
 	public boolean editarConsole(int indice, String nome_edit, String fab_edit, String valcust_edit, String valvend_edit,
 			String qtd_cont_edit, String qtd_jogo_edit) {
 		if(!nome_edit.isEmpty() && !fab_edit.isEmpty() && !valcust_edit.isEmpty() &&
@@ -244,17 +328,24 @@ public class ControleDados {
 		}		
 	}
 	
+	/**
+	 *	Exclui um console possuindo a posição do console no vetor e usando um método da classe Dados
+	 *	@see Dados
+	 */
 	public void excluirConsole(int indice_excluido) {
 		this.d.excluirConsole(indice_excluido);		
 	}
-	
-	//Vendas
-	
-	
+		
 	public int getVendasSize() {
 		return d.getVendasSize();
 	}
 	
+	/**
+	 *	Esse método estático verifica a veracidade das datas de venda e de vencimento de uma venda
+	 *	@throws NullPointerException
+	 *	@throws ParseException
+	 *	@return boolean	
+	 */
 	public static boolean verificaDatas(String dataVenda, String dataVencimento) {
 		if(dataVenda.length() == 10 && dataVencimento.length() == 10 && !dataVenda.isEmpty() && !dataVencimento.isEmpty()) {
 			try {
@@ -301,6 +392,12 @@ public class ControleDados {
 		}		
 	}
 	
+	/**
+	 *	Adiciona uma venda ao vetor de vendas na classe Dados usando um método da classe Dados
+	 *	@see Dados
+	 * 	@throws NullPointerException
+ 	 *  @return boolean 	
+	 */
 	public boolean adicionarVenda(String nome_cliente, String end_cliente, String tel_cliente, String data_venda, 
 			String data_vencimento, double valor_total, String qtd_meses, String[] produtos) {
 			if(data_venda.length() == 10 && data_vencimento.length() == 10 && !data_venda.isEmpty() && !data_vencimento.isEmpty() &&
@@ -323,6 +420,9 @@ public class ControleDados {
 		
 	}	
 	
+	/**
+	 *	Paga uma venda dado o índice da venda no vetor
+	 */	
 	public void pagaVenda(int indice_venda) {
 		this.d.getVendas()[indice_venda].pagarVenda();
 	}
@@ -359,6 +459,10 @@ public class ControleDados {
 		return this.d.getVendas()[indice_venda].getPagamento().getStatusParcela(indice_parcela);
 	}
 	
+	/**
+	 *	Verifica se todas as parcelas de uma venda foram pagas e, se sim, o status muda para "Paga"
+ 	 *  @return boolean 	
+	 */
 	public boolean verificaVendaPaga(int indice_venda) {
 		return this.d.getVendas()[indice_venda].getPagamento().verificaTdsParcelasPagas();
 	}
@@ -367,6 +471,12 @@ public class ControleDados {
 		return this.d.getParcelasString(indice_selecionado);
 	}
 	
+	/**
+	 *	Verifica se o nome digitado pelo usuário corresponde a um usuário existente no banco de dados e retorna o cliente
+	 *	caso ele exista 
+ 	 *  @throws NullPointerException
+ 	 *  @return String 	
+	 */
 	public String procuraNomeCliente(String nome_digitado) {
 		try {
 			Cliente[] c = this.d.getClientes();
@@ -383,6 +493,10 @@ public class ControleDados {
 		}		
 	}
 	
+	/**
+	 *	Retorna o endereço do cliente procuradon
+ 	 *  @return String 	
+	 */
 	public String procuraEndCliente(String nome_digitado) {
 		Cliente[] c = this.d.getClientes();
 		Cliente cliente_procurado = new Cliente();
@@ -395,6 +509,10 @@ public class ControleDados {
 		return cliente_procurado.getEndereco();
 	}
 	
+	/**
+	 *	Retorna o telefone do cliente procuradon
+ 	 *  @return String 	
+	 */
 	public String procuraTelCliente(String nome_digitado) {
 		Cliente[] c = this.d.getClientes();
 		Cliente cliente_procurado = new Cliente();
@@ -407,6 +525,10 @@ public class ControleDados {
 		return cliente_procurado.getTelefone();
 	}
 	
+	/**
+	 *	Retorna o nome do notebook procurado
+ 	 *  @return String 	
+	 */
 	public String procuraNomeNotebook(String not_digitado) {
 		Notebook[] n = this.d.getNotebooks();
 		Notebook not_procurado = new Notebook();
@@ -419,6 +541,10 @@ public class ControleDados {
 		return not_procurado.getNome();
 	}
 	
+	/**
+	 *	Retorna o preço do notebook procurado dado o nome do notebook
+ 	 *  @return double 	
+	 */
 	public double procuraPrecoNotebook(String not_digitado) {
 		Notebook[] n = this.d.getNotebooks();
 		Notebook not_procurado = new Notebook();
@@ -431,6 +557,10 @@ public class ControleDados {
 		return not_procurado.getValorVenda();
 	}
 	
+	/**
+	 *	Retorna o nome do console procurado
+ 	 *  @return String 	
+	 */
 	public String procuraNomeConsole(String con_digitado) {
 		Console_Video_Game[] g = this.d.getConsoles();  
 		Console_Video_Game con_procurado = new Console_Video_Game();
@@ -443,6 +573,10 @@ public class ControleDados {
 		return con_procurado.getNome();
 	}
 	
+	/**
+	 *	Retorna o preço do console procurado dado o nome do console
+ 	 *  @return double 	
+	 */
 	public double procuraPrecoConsole(String con_digitado) {
 		Console_Video_Game[] g = this.d.getConsoles();  
 		Console_Video_Game con_procurado = new Console_Video_Game();
@@ -455,6 +589,10 @@ public class ControleDados {
 		return con_procurado.getValorVenda();
 	}
 	
+	/**
+	 *	Retorna o nome da impressora procurada
+ 	 *  @return String 	
+	 */
 	public String procuraNomeImpressora(String imp_digitada) {
 		Impressora imp_procurada = new Impressora();
 		Impressora[] imp = this.d.getImps();
@@ -467,6 +605,10 @@ public class ControleDados {
 		return imp_procurada.getNome();
 	}
 	
+	/**
+	 *	Retorna o preço da impressora procurada dado o nome da impressora
+ 	 *  @return double 	
+	 */
 	public double procuraPrecoImpressora(String imp_digitada) {
 		Impressora imp_procurada = new Impressora();
 		Impressora[] imp = this.d.getImps();
@@ -479,6 +621,10 @@ public class ControleDados {
 		return imp_procurada.getValorVenda();
 	}
 	
+	/**
+	 *	Retorna o nome do fone procurado
+ 	 *  @return String 	
+	 */
 	public String procuraNomeFone(String fone_digitado) {
 		Fone[] f = this.d.getFones(); 
 		Fone fone_procurado = new Fone();
@@ -491,6 +637,10 @@ public class ControleDados {
 		return fone_procurado.getNome();
 	}
 	
+	/**
+	 *	Retorna o preço do fone procurado dado o nome do fone
+ 	 *  @return double 	
+	 */
 	public double procuraPrecoFone(String fone_digitado) {
 		Fone[] f = this.d.getFones(); 
 		Fone fone_procurado = new Fone();
@@ -503,14 +653,10 @@ public class ControleDados {
 		return fone_procurado.getValorVenda();
 	}
 	
-	public String[] converteEmArray(DefaultListModel<String> produtos_carrinho) {
-		String[] carrinho_array = new String[10]; 
-		for(int i = 0; i<produtos_carrinho.getSize(); i++) {
-			carrinho_array[i] = produtos_carrinho.elementAt(i); 
-		}
-		return carrinho_array;
-	}
-	
+		
+	/**
+	 * Utilizado para pagar uma parcela caso o usuário decida declarar essa parcela dado o índice da parcela e o índice da venda 
+	 */
 	public void pagarParcela(int indice_venda, int indice_parcela) {
 		Venda[] vendas = this.d.getVendas();
 		Venda vendaSelecionada = vendas[indice_venda];
@@ -533,6 +679,11 @@ public class ControleDados {
 		return this.d.getVendas()[indice_venda].getPagamento().getParcelas()[indice_parcela].getDataPag();
 	}
 	
+	/**
+	 *  Método responsável pela exclusão de uma venda do banco de dados dado o índice da venda e utilizando um método da classe
+	 *  Dados
+	 *  @see Dados
+	 */
 	public void excluirVenda(int indice_sel) {
 		this.d.excluirVenda(indice_sel);
 	}

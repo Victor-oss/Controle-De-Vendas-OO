@@ -1,17 +1,25 @@
 package modelo;
 
+/**
+ *	Classe Cliente que representa um cliente da loja
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 public class Cliente {
 	private String nome;
 	private String endereco;
 	private String telefone;
 	
+	public Cliente() {
+		super();
+	}
+	
 	public Cliente(String nome, String endereco, String telefone) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
-	}
-	
-	public Cliente() {
 	}
 	
 	public String getNome() {

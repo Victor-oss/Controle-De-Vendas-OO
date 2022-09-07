@@ -1,4 +1,11 @@
 package controle;
+/**
+ *	Classe ControleImpressoras que é responsável pelos gets de uma impressora no package view         
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 import javax.swing.DefaultListModel;
 
 import modelo.*;		

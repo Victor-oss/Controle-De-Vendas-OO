@@ -1,4 +1,12 @@
 package view;
+/**
+ *	Classe Tela_Detalhe_Produto que permite que o usuário cadastre/insira/leia/exclua um notebook, console, fone-de-ouvido ou
+ *	impressora dependendo do botão escolhido na tela de produtos *	     
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ * 	@see Tela_Produtos 
+ */
 import javax.swing.*;
 import java.awt.*;
 import controle.*;
@@ -40,6 +48,11 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 	private ControleFones contFones;
 	private ControleConsoles contConsoles;		
 		
+	/**
+	 * Método que mostra a tela do tipo de produto desejado com base na opção escolhida pelo cliente, se tipo igual a 1
+	 * a tela será de notebooks, se for 2 a tela será de impressoras, se for 3 a tela será de fones e se for 4 a tela será de 
+	 * consoles
+	 */
 	public void mostrarTela(ControleDados d, int tipo) {
 		tipo_produto = tipo;
 		dados = d;
@@ -228,6 +241,9 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 		
 	}
 	
+	/**
+	 * Método responsável por detectar e responder ao clique do usuário em um componente de jlist
+	 */
 	public void valueChanged(ListSelectionEvent le) {
 		indice = jlst.getSelectedIndex();
 		if(indice < 0 || indice >= nomes_produtos.getSize()) {
@@ -285,6 +301,9 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 		vlvend_prod.setEnabled(true);		
 	}	
 	
+	/**
+	 * Método responsável para que uma ação de CRUD seja realizada dependendo do botão clicado e dependendo do tipo de produto  
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Novo")) {
 			if (tipo_produto == 1) {
@@ -565,6 +584,10 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 		}
 	}
 	
+	/**
+	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar um notebook
+	 * esteja errada
+	 */
 	public void mensagemErroCadastro() {
 		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
 				+ "Pode ter ocorrido um três erros a seguir:  \n"
@@ -574,6 +597,10 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar uma impressora
+	 * esteja errada
+	 */
 	public void mensagemErroCadastroImpressora() {
 		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
 				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"
@@ -582,6 +609,10 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar um fone
+	 * esteja errada
+	 */
 	public void mensagemErroCadastroFone() {
 		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
 				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"
@@ -590,6 +621,10 @@ public class Tela_Detalhe_Produtos implements ListSelectionListener, ActionListe
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Método responsável por exibir uma mensagem de erro caso alguma informação na hora de criar ou editar um console
+	 * esteja errada
+	 */
 	public void mensagemErroCadastroConsole() {
 		JOptionPane.showMessageDialog(null,"ERRO AO SALVAR OS DADOS!\n "
 				+ "Pode ter ocorrido um dos três erros a seguir:  \n"

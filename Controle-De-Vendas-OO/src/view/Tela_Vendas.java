@@ -1,4 +1,11 @@
 package view;
+/**
+ *	Classe Tela_Vendas que permite que o usuário visualize as vendas registradas no banco de dados, podendo criar uma nova
+ *	ou ver o status de uma venda      
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1 
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +25,9 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 	private static ControleDados dados;
 	private static ControleVendas contVendas;
 	
+	/**
+	 * Método que mostra a tela com a vendas registradas
+	 */
 	public void mostrarTela(ControleDados d){		
 		dados = d;
 		contVendas = new ControleVendas(dados);
@@ -51,6 +61,10 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 		jlst.addListSelectionListener(this);
 	}
 	
+	/**
+	 * Método responsável para que um usuário cadastre uma venda ou recarregue a jlist para acompanhar as atualizações nas vendas
+	 * dependendo do botão clicado 
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Nova")) {
 			new TelaDetalheVenda().mostrarTela(dados, contVendas, 1, -1);
@@ -64,8 +78,13 @@ public class Tela_Vendas implements ActionListener, ListSelectionListener{
 		}
 	}	
 	
+	/**
+	 * Método responsável por detectar e responder ao clique do usuário em um componente de jlist
+	 */
 	public void valueChanged(ListSelectionEvent le) {
-		indice = jlst.getSelectedIndex();
-		new TelaDetalheVenda().mostrarTela(dados, contVendas, 2, indice);
+		if(!le.getValueIsAdjusting()) {
+			indice = jlst.getSelectedIndex();
+			new TelaDetalheVenda().mostrarTela(dados, contVendas, 2, indice);
+		}			
 	}
 }

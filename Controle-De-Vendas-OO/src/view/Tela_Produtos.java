@@ -1,5 +1,10 @@
 package view;
-
+/**
+ *	Classe Tela_Produtos que é o menu onde o usuário pode decidir qual tela de produto deseja ver    
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
 import javax.swing.JButton;
 
 import javax.swing.JFrame;
@@ -17,6 +22,9 @@ public class Tela_Produtos implements ActionListener{
 	private JButton btn_consoles = new JButton("Consoles de Video Games");
 	private ControleDados dados;
 	
+	/**
+	 * Método que mostra o menu de produtos 
+	 */
 	public void mostrarTela(ControleDados d) {
 		dados = d;
 		janela.setSize(400, 280);
@@ -45,6 +53,9 @@ public class Tela_Produtos implements ActionListener{
 		janela.setVisible(true);
 	}
 	
+	/**
+	 * Método responsável para que certa tela de produto seja mostrada dependendo do botão clicado  
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Notebooks")) {
 			new Tela_Detalhe_Produtos().mostrarTela(dados, 1);

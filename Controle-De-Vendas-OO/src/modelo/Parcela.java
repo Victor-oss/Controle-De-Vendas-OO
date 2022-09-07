@@ -1,5 +1,12 @@
 package modelo;
 
+/**
+ *	Classe Parcela que representa uma parcela de um pagamento e constitui a classe Pagamento    
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 public class Parcela {
 	private String status;
 	private String data_pagamento;
@@ -11,11 +18,7 @@ public class Parcela {
 		this.valor_parcela = valor_parcela;
 	}
 	
-	public Parcela(String status, double valor_parcela) {
-		this.status = status;
-		this.valor_parcela = valor_parcela;
-	}
-	
+		
 	public String getStatus() {			
 		return this.status;
 	}
@@ -41,6 +44,9 @@ public class Parcela {
 		this.valor_parcela = valor_parcela;
 	}
 	
+	/**
+	 *	Muda o status da parcela para "Paga"  
+	 */
 	public void pagarParcela() {
 		setStatus("Paga");
 	}

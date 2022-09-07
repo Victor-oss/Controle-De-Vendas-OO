@@ -1,5 +1,12 @@
 package view;
-
+/**
+ *	Classe TelaDetalheVenda que permite que o usuário crie, pague parcelas ou exclua uma venda dependendo da ação realizada na 
+ * 	tela com o menu de vendas      
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ * 	@see Tela_Vendas 
+ */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -65,6 +72,11 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	private int indice_sel;
 	private double valor_venda = 0;
 	
+	/**
+	 * Método que mostra uma tela para cadastrar uma venda ou uma para pagar parcelas ou excluir uma venda dependendo
+	 * da operação realizada na tela anterior. Se operacao é 1, o cliente vai para a tela de cadastro. Se for 2, ele vai para
+	 * a tela com as informações uma venda já cadastrada
+	 */
 	public void mostrarTela(ControleDados d, ControleVendas cv, int operacao, int indice_sel){		
 		dados = d;
 		contVendas = cv;
@@ -238,6 +250,10 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 		jf.setVisible(true);
 	}
 	
+	/**
+	 * Método para deixar a tela com as informações de um jeito que é exigido muitas vezes nessa classe, logo foi feito um método
+	 * para evitar linhas repetidas   
+	 */
 	public void limparTd() {
 		nome_cliente.setText("");
 		nome_prod.setText("");		
@@ -268,6 +284,9 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 		}
 	}
 	
+	/**
+	 * Método responsável por realizar uma ação dependendo do botão clicado
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getActionCommand().equals("Procurar")) {
 			try {
@@ -370,6 +389,10 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 		}
 	}
 	
+	/**
+	 * Método utilizado na tela de cadastro de venda para adicionar as informações de um produto comprado na forma
+	 * correta
+	 */
 	public void adicionarProdutoNaLista(String produto_digitado, double valor_unitario, int n_produtos) {
 		valor_tot.setText(String.format("%.2f", valor_venda));
 		nomes_produtos.addElement(produto_digitado+" "+"R$"+valor_unitario+" x"+n_produtos);
@@ -381,6 +404,9 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 		btn_salvar.setEnabled(true);
 	}
 	
+	/**
+	 * Método que detecta ações no checkbox
+	 */
 	public void itemStateChanged(ItemEvent evento) {
 		nome_prod.setEnabled(true);
 		qtd_prod.setEnabled(true);
@@ -446,11 +472,17 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 	   }  			  
 	}
 	
+	/**
+	 * Método para detectar ações na lista de parcelas na tela de visualização de uma venda previamente cadastrada
+	 */
 	public void valueChanged(ListSelectionEvent le) {
 		indice_parcela = jlst2.getSelectedIndex();
 		btn_pagar_parc.setEnabled(true);		
 	}
 	
+	/**
+	 * Método que exibe uma mensagem de erro caso ocorra algum problema na hora de buscar um cliente existente 
+	 */
 	public void mensagemErroCliente() {
 		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR CLIENTE!\n "
 				+ "Pode ter ocorrido um dos dois erros a seguir:  \n"
@@ -459,12 +491,19 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Método que exibe uma mensagem de erro caso o usuário não adicione um número inteiro na JTextField
+	 * para definir a quantidade de produtos que ele deseja comprar 
+	 */
 	public void mensagemErroQtdProdutos() {
 		JOptionPane.showMessageDialog(null,"ERRO AO ADICIONAR PRODUTO!\n "
 				+ "Digite um número inteiro no campo de quantidade", null, 
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Método que exibe uma mensagem de erro caso ocorra um problema na hora de buscar um produto para adicionar ao carrinho
+	 */
 	public void mensagemErroProduto() {
 		JOptionPane.showMessageDialog(null,"ERRO AO PROCURAR PRODUTO!\n "
 				+ "Pode ter ocorrido um dos três erros a seguir:  \n"
@@ -474,6 +513,9 @@ public class TelaDetalheVenda implements ActionListener, ItemListener, ListSelec
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Método que exibe uma mensagem de erro caso ocorra um problema na hora de cadastrar a venda
+	 */	
 	public void mensagemErroDados() {
 		JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR VENDA!\n "
 				+ "Pode ter ocorrido um dos cinco erros a seguir:  \n"

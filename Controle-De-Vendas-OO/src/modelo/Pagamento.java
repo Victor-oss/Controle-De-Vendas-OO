@@ -1,5 +1,12 @@
 package modelo;
 
+/**
+ *	Classe Pagamento que representa um pagamento de uma venda e que é atributo da classe Venda
+ *	@author Victório Lázaro Rocha de Morais
+ *	@since 2022
+ * 	@version 1.1
+ */
+
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -29,7 +36,6 @@ public class Pagamento {
 		gerarParcelas();
 	}
 	
-	//gets e sets
 	public String getDataVend() {
 		return this.data_venda;
 	}
@@ -78,10 +84,18 @@ public class Pagamento {
 		this.qtd_meses = qtd_meses;
 	}
 	
+	/**
+	 *	Retorna o status de determinada parcela dado o índice da parcela
+	 * 	@return String
+	 */
 	public String getStatusParcela(int indice_parc) {
 		return this.parcelas[indice_parc].getStatus();
 	}
 	
+	/**
+	 *	Verifica se todas as parcelas de um pagamento foram pagas
+	 * 	@return boolean
+	 */
 	public boolean verificaTdsParcelasPagas() {
 		boolean vendaPaga = true;
 		for(int i = 0; i < this.parcelas.length; i++) {
@@ -94,6 +108,9 @@ public class Pagamento {
 		return vendaPaga;
 	}
 	
+	/**
+	 *	Cria as parcelas do pagamento
+	 */	
 	public void gerarParcelas() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		double valor_parcela = getValorTot()/getQtdMeses();
@@ -108,7 +125,10 @@ public class Pagamento {
 	public Parcela[] getParcelas() {
 		return this.parcelas;
 	}
-		
+	
+	/**
+	 *	Paga a venda igualando o valor pendente a zero e o valor pago ao valor total  
+	 */
 	public void pagar() {
 		setValorPend(0);	
 		setValorPago(this.valor_total);		
