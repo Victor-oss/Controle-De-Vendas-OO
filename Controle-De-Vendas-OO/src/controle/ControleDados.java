@@ -273,7 +273,7 @@ public class ControleDados {
 				try {
 					double vlvenda_ver = Double.parseDouble(vlvend_novo);
 					double vlcust_ver = Double.parseDouble(vlcust_novo);
-					this.d.adicionarImp(new Impressora(nome_novo, fab_novo, vlcust_ver, vlvenda_ver, tec_imp_nova, tamfol_nova));
+					this.d.adicionarImp(new Impressora(nome_novo, fab_novo, vlcust_ver, vlvenda_ver, tamfol_nova, tec_imp_nova));
 					return true;
 				} catch (NumberFormatException e) {
 					return false;
