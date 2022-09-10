@@ -1,8 +1,5 @@
-package controle;
-
-
 import static org.junit.jupiter.api.Assertions.*;
-
+import controle.*;
 import org.junit.jupiter.api.Test;
 
 /**
